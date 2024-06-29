@@ -2,8 +2,11 @@ site_name: 智能体大赛引导文档
 nav:
   - 文档说明: index.md
   - 平台介绍: platform.md
-  - sdk结构: sdk.md
-  - 开发引导: guide.md
+  - sdk结构:
+    - 总览: sdk.md
+    - 热身赛: test_race_sdk.md
+  - 开发引导:
+    - 热身赛: test_race.md
 theme:
   name: material
 

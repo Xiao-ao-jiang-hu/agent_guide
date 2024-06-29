@@ -476,7 +476,7 @@
 </ol>
 <h2 id="_2">通信协议</h2>
 <p>由于平台没有限制选手AI与裁判程序的通信格式，通信协议会由游戏开发者规定。 选手需要阅读游戏文档中的通信协议规定，在实现的AI中将操作格式化为通信协议规定的格式。</p>
-<p>通常，通信协议包含了AI向judger发送自身操作的格式，以及judger转发的游戏逻辑发送的对方操作、回合结束信息以及可能包含的。</p>
+<p>通常，通信协议包含了AI向judger发送自身操作的格式，以及judger转发的游戏逻辑发送的对方操作、回合结束信息以及可能包含的局面更新信息。</p>
 <h2 id="_3">典型样例：猜数字游戏</h2>
 <p>游戏逻辑随机选取一个0～1999中的数。两名玩家交替公开猜测，游戏逻辑告知双方是否猜中，直到一方猜中该数字。猜中的玩家获胜。</p>
 <h3 id="_4">典型通信过程</h3>
@@ -606,7 +606,6 @@ int main(){
     <nav>
       
         <a href="mailto:wst22@mails.tsinghua.edu.cn">Xiaoaojianghu</a>, 
-        <a href="mailto:not.committed.yet">Not Committed Yet</a>, 
         <a href="mailto:xiaoaojianghu@wst.local">校奥浆糊</a>
     </nav>
   </span>
