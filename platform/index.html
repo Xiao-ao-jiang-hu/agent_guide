@@ -286,9 +286,33 @@
         <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      典型通信过程样例
+      典型样例：猜数字游戏
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="典型样例：猜数字游戏">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      典型通信过程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      选手AI的实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -387,9 +411,33 @@
         <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      典型通信过程样例
+      典型样例：猜数字游戏
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="典型样例：猜数字游戏">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      典型通信过程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      选手AI的实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -408,8 +456,8 @@
                   
 
 
-<h1 id="_1">智能体大赛引导文档</h1>
-<p>本文档将详细说明如何使用赛事方提供的sdk或从零开始开发选手个人的ai，并将ai派遣到saiblo平台进行天梯对战。</p>
+<h1 id="_1">平台使用导引</h1>
+<p>本文档将详细说明ai如何与平台交互，并介绍AI的通常实现方式。</p>
 <h2 id="saiblo">saiblo平台的交互逻辑</h2>
 <p>下图展示了saiblo平台的结构:
 <a class="glightbox" href="../imgs/saiblo-structure.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/saiblo-structure.png" /></a></p>
@@ -429,7 +477,9 @@
 <h2 id="_2">通信协议</h2>
 <p>由于平台没有限制选手AI与裁判程序的通信格式，通信协议会由游戏开发者规定。 选手需要阅读游戏文档中的通信协议规定，在实现的AI中将操作格式化为通信协议规定的格式。</p>
 <p>通常，通信协议包含了AI向judger发送自身操作的格式，以及judger转发的游戏逻辑发送的对方操作、回合结束信息以及可能包含的。</p>
-<h2 id="_3">典型通信过程样例</h2>
+<h2 id="_3">典型样例：猜数字游戏</h2>
+<p>游戏逻辑随机选取一个0～1999中的数。两名玩家交替公开猜测，游戏逻辑告知双方是否猜中，直到一方猜中该数字。猜中的玩家获胜。</p>
+<h3 id="_4">典型通信过程</h3>
 <p>一个典型的一千以内猜数字游戏流通信协议如下：</p>
 <pre><code>游戏逻辑：
 在游戏开始时发送一个数字，该数字为0或1，如收到0代表玩家为先手，否则为后手；
@@ -484,6 +534,41 @@ AI1收到裁判程序的消息，但触发了神奇bug，调用了sleep(114514)�
 结束阶段：
 游戏逻辑进行结束阶段清理，随后通知裁判程序游戏结束并告知游戏结果。
 </code></pre>
+<h3 id="ai">选手AI的实现</h3>
+<p>在猜数字游戏中，一个典型的AI实现如下：</p>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+using namespace std;
+
+int main(){
+    int my_seat, opposite_guess = 0;
+    int my_guess = 0, impossible[1000];
+    cin &gt;&gt; my_seat;
+    while(1){                               // 持续交互
+        if(!my_seat){                       // 判断先后手
+            while(impossible[my_guess])     // 进行决策
+                ++my_guess;                 
+            cout &lt;&lt; my_guess &lt;&lt; &quot;\n&quot;;       // 向裁判程序发送决策
+
+            cin &gt;&gt; opposite_guess;          // 等待对方操作
+            if(opposite_guess &gt;= 0)         // 更新局面
+                impossible[opposite_guess] = 1;
+            else
+                return;
+        }
+        else{
+            cin &gt;&gt; opposite_guess;
+            if(opposite_guess &gt;= 0)
+                impossible[opposite_guess] = 1;
+            else
+                return;
+
+            while(impossible[my_guess])
+                ++my_guess;
+            cout &lt;&lt; my_guess &lt;&lt; &quot;\n&quot;;
+        }
+    }
+}
+</code></pre>
 
 
 
@@ -521,6 +606,7 @@ AI1收到裁判程序的消息，但触发了神奇bug，调用了sleep(114514)�
     <nav>
       
         <a href="mailto:wst22@mails.tsinghua.edu.cn">Xiaoaojianghu</a>, 
+        <a href="mailto:not.committed.yet">Not Committed Yet</a>, 
         <a href="mailto:xiaoaojianghu@wst.local">校奥浆糊</a>
     </nav>
   </span>
