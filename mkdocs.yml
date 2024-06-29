@@ -8,7 +8,18 @@ nav:
   - 开发引导:
     - 热身赛: test_race.md
 theme:
+  logo: imgs/icon.jpg
+  favicon: imgs/icon.jpg
+  palette:
+    primary: black
   name: material
+
+markdown_extensions: 
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
 
 plugins:
   - search
