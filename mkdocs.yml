@@ -1,0 +1,8 @@
+site_name: 智能体大赛引导文档
+nav:
+  - 文档说明: index.md
+  - 平台介绍: platform.md
+  - sdk结构: sdk.md
+  - 开发引导: guide.md
+theme:
+  name: material
