@@ -12,7 +12,7 @@
         <link rel="prev" href="../platform/">
       
       
-        <link rel="next" href="../guide/">
+        <link rel="next" href="../test_race_sdk/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>sdk结构 - 智能体大赛引导文档</title>
+        <title>总览 - 智能体大赛引导文档</title>
       
     
     
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              sdk结构
+              总览
             
           </span>
         </div>
@@ -241,6 +241,43 @@
   
   
   
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    sdk结构
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            sdk结构
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -253,7 +290,7 @@
           
   
   <span class="md-ellipsis">
-    sdk结构
+    总览
   </span>
   
 
@@ -264,7 +301,7 @@
         
   
   <span class="md-ellipsis">
-    sdk结构
+    总览
   </span>
   
 
@@ -379,6 +416,35 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../test_race_sdk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    热身赛
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
@@ -386,16 +452,59 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../guide/" class="md-nav__link">
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     开发引导
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            开发引导
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../test_race/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    热身赛
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -531,11 +640,11 @@
 <h1 id="sdk">SDK使用指南</h1>
 <p>本文档主要介绍SDK通常的结构，以及选手应如何使用主办方提供的SDK</p>
 <h2 id="_1">标题没想好</h2>
-<p>回顾人工智能领域中智能体的定义：能够与环境交互并作出决策。如果能够将环境和交互抽象成接口，开发者就仅需要考虑决策过程的实现，这可以大大减轻开发者的负担。智能体大赛主办方提供的SDK就实现了基础的环境和交互过程的抽象，同时提供了一些可视化和调试工具。</p>
+<p>回顾人工智能领域中智能体的定义：能够与环境交互并作出决策。如果能够将环境和交互抽象成接口，开发者就仅需要考虑决策过程的实现，这可以大大减轻开发者的负担。智能体大赛主办方提供的SDK就实现了基础的环境和交互过程的抽象，同时可能提供一些可视化和调试工具。</p>
 <h2 id="sdk_1">SDK常见结构</h2>
 <p><a class="glightbox" href="../imgs/sdk-structure.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/sdk-structure.svg" /></a></p>
 <h3 id="_2">游戏状态类</h3>
-<p>游戏状态类是环境的核心类。游戏状态包含了一个完整的环境。例如，在围棋游戏中，游戏状态类可以使用多个二维数组表示。为了方便维护，游戏状态类可能还会维护重复的信息。游戏状态类通常对选手暴露查询接口，例如选手可以使用查询函数查询棋盘上的某个点的落子情况、落子的步数、剩余的气等信息。</p>
+<p>游戏状态类是环境的核心类。游戏状态类包含了一个完整的环境。例如，在围棋游戏中，游戏状态类可以使用多个二维数组表示。为了方便维护，游戏状态类可能还会维护重复的信息。游戏状态类通常对选手暴露查询接口，例如选手可以使用查询函数查询棋盘上的某个点的落子情况、落子的步数、剩余的气等信息。</p>
 <h3 id="_3">状态维护函数</h3>
 <p>状态维护函数负责在智能体进行操作后维护游戏状态。这保证了游戏状态的实时性和正确性。例如，在围棋游戏中，智能体落子后。状态维护函数将修改二维数组对应位置处的值，保证落子情况、落子步数等信息的变化被更新到环境中。</p>
 <h3 id="_4">完备的交互环境</h3>
