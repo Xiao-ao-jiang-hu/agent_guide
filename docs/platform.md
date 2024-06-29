@@ -1,5 +1,5 @@
-# 智能体大赛引导文档
-本文档将详细说明如何使用赛事方提供的sdk或从零开始开发选手个人的ai，并将ai派遣到saiblo平台进行天梯对战。
+# 平台使用导引
+本文档将详细说明ai如何与平台交互，并介绍AI的通常实现方式。
 
 ## saiblo平台的交互逻辑
 下图展示了saiblo平台的结构:
@@ -20,9 +20,12 @@
 ## 通信协议
 由于平台没有限制选手AI与裁判程序的通信格式，通信协议会由游戏开发者规定。 选手需要阅读游戏文档中的通信协议规定，在实现的AI中将操作格式化为通信协议规定的格式。
 
-通常，通信协议包含了AI向judger发送自身操作的格式，以及judger转发的游戏逻辑发送的对方操作、回合结束信息以及可能包含的。
+通常，通信协议包含了AI向judger发送自身操作的格式，以及judger转发的游戏逻辑发送的对方操作、回合结束信息以及可能包含的局面更新信息。
 
-## 典型通信过程样例
+
+## 典型样例：猜数字游戏
+游戏逻辑随机选取一个0～1999中的数。两名玩家交替公开猜测，游戏逻辑告知双方是否猜中，直到一方猜中该数字。猜中的玩家获胜。
+### 典型通信过程
 一个典型的一千以内猜数字游戏流通信协议如下：
 ```
 游戏逻辑：
@@ -83,4 +86,41 @@ AI1收到裁判程序的消息，但触发了神奇bug，调用了sleep(114514)�
 
 结束阶段：
 游戏逻辑进行结束阶段清理，随后通知裁判程序游戏结束并告知游戏结果。
+```
+
+### 选手AI的实现
+在猜数字游戏中，一个典型的AI实现如下：
+```cpp
+#include<iostream>
+using namespace std;
+
+int main(){
+    int my_seat, opposite_guess = 0;
+    int my_guess = 0, impossible[1000];
+    cin >> my_seat;
+    while(1){                               // 持续交互
+        if(!my_seat){                       // 判断先后手
+            while(impossible[my_guess])     // 进行决策
+                ++my_guess;                 
+            cout << my_guess << "\n";       // 向裁判程序发送决策
+
+            cin >> opposite_guess;          // 等待对方操作
+            if(opposite_guess >= 0)         // 更新局面
+                impossible[opposite_guess] = 1;
+            else
+                return;
+        }
+        else{
+            cin >> opposite_guess;
+            if(opposite_guess >= 0)
+                impossible[opposite_guess] = 1;
+            else
+                return;
+
+            while(impossible[my_guess])
+                ++my_guess;
+            cout << my_guess << "\n";
+        }
+    }
+}
 ```
