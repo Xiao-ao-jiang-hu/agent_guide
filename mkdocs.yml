@@ -6,3 +6,13 @@ nav:
   - 开发引导: guide.md
 theme:
   name: material
+
+plugins:
+  - search
+  - glightbox
+  - git-revision-date-localized:
+      fallback_to_build_date: true
+      locale: zh
+  - git-authors:
+      show_contribution: true
+      show_line_count: true
