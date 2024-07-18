@@ -1,5 +1,5 @@
 # mkdocs build directory
 /site/*
-
+site/
 # macOS
 .DS_Store
