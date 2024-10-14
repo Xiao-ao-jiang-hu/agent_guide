@@ -22,6 +22,16 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/katex.js
+  - https://unpkg.com/browse/katex@0.16.11/dist/katex.min.js
+  - https://unpkg.com/browse/katex@0.16.11/dist/contrib/auto-render.min.js
+
+extra_css:
+  - https://unpkg.com/browse/katex@0.16.11/dist/katex.min.css
 
 plugins:
   - search
