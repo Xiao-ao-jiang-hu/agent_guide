@@ -5,12 +5,10 @@ nav:
   - sdk结构:
     - 总览: sdk_structure/sdk.md
     - 热身赛: sdk_structure/test_race_sdk.md
-    - 吃豆人: sdk_structure/pacman_sdk.md
   - 播放器使用说明:
     - 热身赛: player/test_race.md
   - 开发引导:
     - 热身赛: instruction/test_race.md
-    - 吃豆人: instruction/pacman.md
 theme:
   logo: imgs/icon.jpg
   favicon: imgs/icon.jpg
