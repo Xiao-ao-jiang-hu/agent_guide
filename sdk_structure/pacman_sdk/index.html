@@ -393,9 +393,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      游戏的基本信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#reset" class="md-nav__link">
     <span class="md-ellipsis">
       reset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai_reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      ai_reset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#render" class="md-nav__link">
+    <span class="md-ellipsis">
+      render
     </span>
   </a>
   
@@ -426,7 +453,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       初始化
     </span>
@@ -672,9 +699,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      游戏的基本信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#reset" class="md-nav__link">
     <span class="md-ellipsis">
       reset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai_reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      ai_reset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#render" class="md-nav__link">
+    <span class="md-ellipsis">
+      render
     </span>
   </a>
   
@@ -705,7 +759,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       初始化
     </span>
@@ -761,11 +815,29 @@
 <h2 id="_1">代码结构</h2>
 <p>SDK由GYM环境类、AI函数和游戏控制器组成。</p>
 <h3 id="gym">GYM环境类</h3>
+<h4 id="_2">游戏的基本信息</h4>
+<p>本游戏是吃豆人的魔改版本，共有三个关卡。每个关卡的地图大小分别为 38×38、29×29 和 18×18。吃豆人在每一关中可行走的步数是有限的，如果达到最大步数，将会强制进入下一关。</p>
+<p>地图内有墙壁和空地，空地上随机分布着不同种类的豆子。吃豆人在躲避幽灵追击的同时，需要尽可能在有限的步数内吃掉更多的豆子，以获得更高的分数，而幽灵则要尽可能的抓住吃豆人。</p>
+<p>场景内共有六种豆子：</p>
+<p>普通豆子：每吃一个加 1 分。
+奖励豆子：每吃一个加 2 分。
+×2 豆子：吃掉后，吃豆人在接下来的 10 步内所得分数加倍。
+加速豆子：吃掉后，吃豆人在接下来的 10 步内速度翻倍，即每回合走 2 格，但不支持自动拐弯。
+磁铁豆子：吃掉后，吃豆人在接下来的 10 步内可以吸取当前位置周围 3×3 范围内的所有豆子（在第一关地图较大，吃豆人可以吸取周围 5×5 范围内的所有豆子）。
+护盾豆子：吃掉后，吃豆人在接下来的 10 步内可以免疫一次幽灵的抓捕。
+在第一关和第二关中，地图中间区域存在通往下一关的传送门。当地图内剩余豆子不足 1/3 时，传送门会开启，吃豆人可以直接进入下一关。</p>
+<p>额外加分：如果吃豆人在没有被幽灵抓住的情况下，一命连续获得 100 分，则会获得额外的加分。</p>
+<p>幽灵每抓住一次吃豆人，幽灵方即获得100分的加分。</p>
 <p>GYM环境类维护了游戏局面的全量信息。该类提供如下接口：</p>
 <h4 id="reset">reset</h4>
+<p>reset 函数在每关开始时由 judger 调用。玩家将进入一个新的地图，吃豆人和三个幽灵会随机生成在地图的四个角落。该函数会返回一个包含新地图信息的 JSON 字符串。随后，judger 会将这个 JSON 字符串编码并发送给 AI。</p>
+<h4 id="ai_reset">ai_reset</h4>
+<p>此函数由 AI 调用，用于解码 judger 发送的信息并初始化本地地图。</p>
+<h4 id="render">render</h4>
+<p>此函数可在本地终端生成地图进行对战，供选手调试使用。</p>
 <h4 id="step">step</h4>
 <h3 id="controller">Controller</h3>
-<h4 id="_2">初始化</h4>
+<h4 id="_3">初始化</h4>
 <p>初始化时逻辑通过judger向0号玩家发送字符串"0"，向1号玩家发送字符串"1"，0号玩家先发送操作消息，1号玩家后发送操作消息。</p>
 <h4 id="run">run</h4>
 <p>run函数首先判断是否进入新的level，若进入新的level则读取judger传来的初始化信息并实例化整局游戏唯一的环境实例。</p>
@@ -811,7 +883,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年12月9日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年12月12日</span>
   </span>
 
     
@@ -822,12 +894,13 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:wang-xt23@mails.tsinghua.edu.cn">wangxt111</a>
+        <a href="mailto:wang-xt23@mails.tsinghua.edu.cn">wangxt111</a>, 
+        <a href="mailto:17701248665@189.cn">WilmaLiu2005</a>
     </nav>
   </span>
 
