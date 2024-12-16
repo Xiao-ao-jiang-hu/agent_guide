@@ -576,7 +576,12 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       选手可获取的内容及获取方式
@@ -595,8 +600,48 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取轮数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取棋盘相关信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取吃豆人相关信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取幽灵相关信息
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取传送门相关信息
+    </span>
+  </a>
   
 </li>
         
@@ -662,29 +707,67 @@ GYM环境类维护了游戏局面的全量信息。该类提供如下接口：</
 <p>最后读取judger传来的幽灵和吃豆人的操作信息，更新整局游戏唯一的环境实例。</p>
 <h3 id="ai">AI函数</h3>
 <p>一个输入为GYM环境类实例，输出为操作序号的函数。<strong>注意，请不要在函数中直接对传入的环境实例作修改。请使用deepcopy复制</strong></p>
-<h3 id="_3">选手可获取的内容及获取方式</h3>
-<h4 id="_4">获取关卡号</h4>
-<p><code>gamestate.level</code> 返回一个int值，表示关卡号</p>
-<p><code>gamestate.round</code> 返回一个int值，表示当前关卡进行到的轮数</p>
-<p><code>gamestate.board_size</code> 返回一个int值，表示当前棋盘大小</p>
-<p><code>gamestate.board</code> 返回一个nparray，表示棋盘</p>
-<p>棋盘中元素 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>0代表墙
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>1代表空地
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>2代表普通豆子
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>3代表奖励豆子
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>4代表加速豆子
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>5代表磁铁豆子
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>6代表护盾豆子
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>7代表*2豆子
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>8代表传送门
+<h2 id="_3">选手可获取的内容及获取方式</h2>
+<h3 id="_4">获取关卡号</h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">level</span>
 </code></pre></div>
-<code>gamestate.pacman_skill_status</code> 返回list[int]，表示吃豆人当前拥有的技能</p>
-<p><code>gamestate.pacman_pos</code> 返回list[int]，长度为2，分别为吃豆人的横纵坐标</p>
-<p><code>gamestate.ghosts_pos</code> 返回list[list[int]]，长度为3，表示三个幽灵的坐标</p>
-<p><code>gamestate.pacman_score</code> 返回一个int值，表示当前吃豆人得分</p>
-<p><code>gamestate.ghosts_score</code> 返回一个int值，表示当前幽灵得分</p>
-<p>TODO(wxt): 完善gamestate接口说明</p>
+返回类型 ：<code>int</code></p>
+<p>表示当前关卡号 </p>
+<h3 id="_5">获取轮数</h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">round</span>
+</code></pre></div>
+返回类型：<code>int</code></p>
+<p>表示当前关卡进行到的轮数</p>
+<h3 id="_6">获取棋盘相关信息</h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">board_size</span>
+</code></pre></div>
+返回类型：<code>int</code></p>
+<p>表示当前棋盘大小</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">board</span>
+</code></pre></div>
+返回类型：<code>np.ndarray</code></p>
+<p>表示棋盘，棋盘中元素 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>0代表墙
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>1代表空地
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>2代表普通豆子
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>3代表奖励豆子
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>4代表加速豆子
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>5代表磁铁豆子
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>6代表护盾豆子
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>7代表*2豆子
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>8代表传送门
+</code></pre></div></p>
+<h3 id="_7">获取吃豆人相关信息</h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">pacman_skill_status</span>
+</code></pre></div>
+返回类型：<code>list[int]</code></p>
+<p>表示吃豆人当前拥有的技能，数组共4个元素，分别表示<b>DOUBLE_SCORE技能、SPEED_UP技能、MAGNET技能的剩余轮数和当前拥有的SHIELD的数量</b></p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">pacman_pos</span>
+</code></pre></div>
+返回类型：<code>np.ndarray[int]</code></p>
+<p>长度为2， <code>gamestate.pacman_pos[0]</code> 和 <code>gamestate.pacman_pos[1]</code> 分别表示吃豆人的横纵坐标</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>gamestate.pacman_score
+</code></pre></div>
+返回类型：<code>int</code></p>
+<p>表示当前吃豆人的得分</p>
+<h3 id="_8">获取幽灵相关信息</h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>gamestate.ghosts_pos
+</code></pre></div>
+返回类型：<code>np.ndarray[np.ndarray[int]]</code></p>
+<p>长度为3，表示三个幽灵的坐标</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>gamestate.ghosts_score
+</code></pre></div>
+返回类型：<code>int</code></p>
+<p>表示当前幽灵的得分</p>
+<h3 id="_9">获取传送门相关信息</h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>gamestate.portal_available
+</code></pre></div>
+返回类型：<code>bool</code></p>
+<p>表示当前传送门是否开启</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>gamestate.portal_coord
+</code></pre></div>
+返回类型：<code>np.ndarray[int]</code></p>
+<p>长度为2， <code>gamestate.portal_coord[0]</code> 和 <code>gamestate.portal_coord[1]</code> 分别表示传送门的横纵坐标</p>
 <p>TODO(zyc): 完善除gamestate外其他接口的说明</p>
 
 
