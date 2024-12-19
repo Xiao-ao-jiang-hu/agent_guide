@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../imgs/icon.jpg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
     
     
       
@@ -531,36 +531,38 @@
 
 
 <h1 id="_1">游戏基本信息</h1>
-<p>本游戏是吃豆人的魔改版本，共有三个关卡。每个关卡的地图大小分别为 38×38、29×29 和 18×18，棋盘以左下角为(0,0)。吃豆人在每一关中可行走的步数是有限的，如果达到最大步数，将会强制进入下一关。</p>
-<p>TODO(lxy):最大步数说明</p>
-<p>地图内有墙壁和空地，空地上随机分布着不同种类的豆子。吃豆人在躲避幽灵追击的同时，需要尽可能在有限的步数内吃掉更多的豆子，以获得更高的分数，而幽灵则要尽可能的抓住吃豆人。</p>
+<p>在这款游戏中，你将扮演一名北京某大学的学生，身处于一个充满挑战和机遇的学术迷宫。你的目标是通过不断闯关，收集象征知识和智慧的金币，以提升自己的能力。每一枚金币代表着你对世界的理解和自我成长的一步。
+然而，前方的路并不平坦。三位幽灵——课业、科研和社工——正紧追不放。课业幽灵随时准备考核你的学术能力，科研幽灵则悄然在你周围游荡，时刻考验你在实验室和研究中的坚持，而社工幽灵则是各种社会活动和人际关系的代名词，时刻挑战你平衡学习与生活的能力。
+为了逃脱这些幽灵的追捕，你必须灵活躲避，快速思考，尽可能多地收集知识金币，积累经验，不断提升自己的能力，以突破重重难关。每一次突破，都意味着你离成为更加优秀的自己更近一步。
+在这个充满挑战的世界中，你不仅是在与幽灵对抗，更是在与时间、压力和自我成长进行一场博弈。
+在每个关卡中，你将掌握自己命运的钥匙。随着关卡的进行，经过一段时间后，通往下一关的传送之门将悄然开启。在这个时刻，你将面临抉择：是选择立即穿越传送门，迈向下一关的挑战，还是继续停留在当前关卡，收集剩余的知识金币？这一决定关乎你的成长与安全。你必须在获取更多知识与保障自身安全之间做出智慧的权衡。每一次选择，都将影响你最终的冒险进程。</p>
 <p>TODO(zyc):抓捕后位置和技能的重置情况</p>
 <h2 id="_2">场景设置</h2>
-<p>场景内共有六种豆子：</p>
+<p>每个关卡的地图大小分别为 38×38、29×29 和 18×18，地图以左下角为(0,0)。你在每一关中可行走的步数是有限的，三个关卡的最大步数分别为500、400、300，如果达到最大步数，将会强制进入下一关。
+场景内共有六种金币，其中除普通的知识金币外其余的特殊道具数量较少：</p>
 <ol>
 <li>
-<p>普通豆子：每吃一个加 1 分。</p>
+<p>知识金币：每获得一个加 1 分。</p>
 </li>
 <li>
-<p>奖励豆子：每吃一个加 2 分。</p>
+<p>双倍荣耀币：价值双倍的金币，让你在知识的世界中快速积累更多的财富，一次成功收集，便能突破多个难关。</p>
 </li>
 <li>
-<p>加速豆子：吃掉后，吃豆人在接下来的 10 步内速度翻倍，即每回合走 2 格，但不支持自动拐弯。</p>
+<p>疾风之翼：拥有它，在接下来的10步中，你将如风般迅速，一步并作两步，疾速穿梭在学术迷宫中，迅捷躲避幽灵的追击。</p>
 </li>
 <li>
-<p>磁铁豆子：吃掉后，吃豆人在接下来的 10 步内可以吸取当前位置周围 3×3 范围内的所有豆子（在第一关地图较大，吃豆人可以吸取周围 5×5 范围内的所有豆子）。</p>
+<p>智引磁石：拥有它，在接下来的10步中，你可以吸引到周围3*3的所有金币与特殊道具，让你轻松收集，仿佛一块智慧的磁铁。</p>
 </li>
 <li>
-<p>护盾豆子：吃掉后，吃豆人可以免疫一次幽灵的抓捕。</p>
+<p>护学之盾：在命悬一线时，护学之盾将为你挡住幽灵的追捕，保护你在最危急的时刻安全脱离困境。</p>
 </li>
 <li>
-<p>×2 豆子：吃掉后，吃豆人在接下来的 10 步内所得分数加倍。</p>
+<p>智慧圣典：一本神奇的书籍，开启智慧的传承，助你在接下来的10步中事半功倍，快速克服课业、科研与社交的困扰。</p>
 </li>
 <li>
-<p>在第一关和第二关中，地图中间区域存在通往下一关的传送门。当地图内剩余豆子不足 1/3 时，传送门会开启，吃豆人可以直接进入下一关。</p>
+<p>在第一关和第二关中，地图中间区域存在通往下一关的传送门。当你在第一关行走超过90步以及在第二关行走超过40步时，传送门会开启，你可以通过进入传送门来直接进入下一关的挑战。</p>
 </li>
 </ol>
-<p>TODO(lxy): 更改场景设置</p>
 <h2 id="_3">加分规则</h2>
 <h3 id="_4">吃豆人</h3>
 <p>如果吃豆人在没有被幽灵抓住的情况下，一命连续获得 100 分，则会获得额外的100分加分。</p>
@@ -591,7 +593,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年12月16日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年12月19日</span>
   </span>
 
     
@@ -602,12 +604,13 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:wang-xt23@mails.tsinghua.edu.cn">wangxt111</a>
+        <a href="mailto:wang-xt23@mails.tsinghua.edu.cn">wangxt111</a>, 
+        <a href="mailto:17701248665@189.cn">WilmaLiu2005</a>
     </nav>
   </span>
 
@@ -656,7 +659,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../assets/javascripts/bundle.88dd0f4e.min.js"></script>
       
         <script src="../javascripts/katex.js"></script>
       
