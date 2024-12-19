@@ -2,9 +2,9 @@ site_name: 智能体大赛引导文档
 nav:
   - 文档说明: index.md
   - 平台介绍: platform.md
-  - 游戏概述: 
-    # - 游戏简介: pacman.md
-    # - 通信文档: pacman_api.md
+  # - 游戏概述: 
+  #   - 游戏简介: pacman.md
+  #   - 通信文档: pacman_api.md
   - sdk结构:
     - 总览: sdk_structure/sdk.md
     - 热身赛: sdk_structure/test_race_sdk.md
