@@ -1,9 +1,13 @@
 # 吃豆人SDK引导
 本文档是吃豆人和幽灵的SDK使用说明
 
+吃豆人SDK仓库：[https://github.com/PacMan-Logic/PacmanSDK-python](https://github.com/PacMan-Logic/PacmanSDK-python)
+
+幽灵SDK仓库：[https://github.com/PacMan-Logic/GhostsSDK-python](https://github.com/PacMan-Logic/GhostsSDK-python)
+
 ## 代码结构
 
-SDK由GYM环境类、AI函数和游戏控制器组成。
+SDK由GYM环境类、游戏控制器和AI函数组成。
 
 ### 将sdk下载到本地及配置
 1. 安装并配置git
@@ -62,8 +66,10 @@ ghosts_op(self.env,ai) # 当前玩家为幽灵，则ai返回一个含3个元素�
 
 最后读取judger传来的幽灵和吃豆人的操作信息，更新整局游戏唯一的环境实例。
 
+**注意若AI发送了不合理的操作号（比如5、-1等）则会被视为不进行移动**
+
 ### AI函数
-一个输入为GYM环境类实例，输出为操作序号的函数。**注意，请不要在函数中直接对传入的环境实例作修改。请使用deepcopy复制**
+一个输入为GameState类实例，输出为操作数组的函数。**注意，请不要在函数中直接对传入的环境实例作修改。请使用deepcopy复制**
 
 ## 选手可获取的内容及获取方式
 
