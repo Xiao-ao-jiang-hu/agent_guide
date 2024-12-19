@@ -5,10 +5,13 @@
 
 SDK由GYM环境类、AI函数和游戏控制器组成。
 
-### GYM环境类
-TODO(lxy): git clone以后配置core的说明，不会问zyc
-GYM环境类维护了游戏局面的全量信息。该类提供如下接口：
+### 将sdk下载到本地及配置
+1. 安装并配置git
+2. 克隆远程仓库到本地（在终端输入）:`git clone <repository_url>`
+3. 配置sdk中的core（在终端输入）:`git submodule update --remote core`
 
+### GYM环境类（PacmanEnv）
+GYM环境类（PacmanEnv）维护了游戏局面的全量信息供AI调用。该类提供如下接口：
 #### reset
 reset 函数在每关开始时由 judger 调用。玩家将进入一个新的地图，吃豆人和三个幽灵会随机生成在地图的四个角落。该函数会返回一个包含新地图信息的 JSON 字符串。随后，judger 会将这个 JSON 字符串编码并发送给 AI。
 
