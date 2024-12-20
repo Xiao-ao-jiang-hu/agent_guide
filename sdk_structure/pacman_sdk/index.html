@@ -16,7 +16,7 @@
     
     
       
-        <title>吃豆人SDK引导 - 智能体大赛引导文档</title>
+        <title>吃豆人 SDK 引导 - 智能体大赛引导文档</title>
       
     
     
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              吃豆人SDK引导
+              吃豆人 SDK 引导
             
           </span>
         </div>
@@ -495,15 +495,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#sdk_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK的下载及配置
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       代码结构
@@ -514,13 +505,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gympacmanenv" class="md-nav__link">
+  <a href="#sdk_1" class="md-nav__link">
     <span class="md-ellipsis">
-      GYM环境类（PacmanEnv）
+      将 sdk 下载到本地及配置
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="GYM环境类（PacmanEnv）">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gym-pacmanenv" class="md-nav__link">
+    <span class="md-ellipsis">
+      GYM 环境类（PacmanEnv）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GYM 环境类（PacmanEnv）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -567,11 +567,11 @@
           <li class="md-nav__item">
   <a href="#controller" class="md-nav__link">
     <span class="md-ellipsis">
-      游戏控制器（Controller）
+      Controller
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="游戏控制器（Controller）">
+    <nav class="md-nav" aria-label="Controller">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -600,7 +600,7 @@
           <li class="md-nav__item">
   <a href="#ai" class="md-nav__link">
     <span class="md-ellipsis">
-      AI函数
+      AI 函数
     </span>
   </a>
   
@@ -675,6 +675,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取空间信息
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -695,120 +704,132 @@
                   
 
 
-<h1 id="sdk">吃豆人SDK引导</h1>
-<p>本文档是吃豆人和幽灵的SDK使用说明</p>
-<p>吃豆人SDK仓库：<a href="https://github.com/PacMan-Logic/PacmanSDK-python">https://github.com/PacMan-Logic/PacmanSDK-python</a></p>
-<p>幽灵SDK仓库：<a href="https://github.com/PacMan-Logic/GhostsSDK-python">https://github.com/PacMan-Logic/GhostsSDK-python</a></p>
-<h2 id="sdk_1">SDK的下载及配置</h2>
-<ol>
-<li>安装并配置git</li>
-<li>克隆远程仓库到本地（在终端输入）: <code>git clone &lt;repository_url&gt;</code></li>
-<li>配置sdk中的core（进入SDK所在目录并在终端输入）: 
-<code>git submodule init</code> <code>git submodule update</code></li>
-<li>后续更新core（在终端输入）: <code>git submodule update --remote core</code></li>
-</ol>
+<h1 id="sdk">吃豆人 SDK 引导</h1>
+<p>本文档是吃豆人和幽灵的 SDK 使用说明</p>
+<p>吃豆人 SDK 仓库：<a href="https://github.com/PacMan-Logic/PacmanSDK-python">https://github.com/PacMan-Logic/PacmanSDK-python</a></p>
+<p>幽灵 SDK 仓库：<a href="https://github.com/PacMan-Logic/GhostsSDK-python">https://github.com/PacMan-Logic/GhostsSDK-python</a></p>
 <h2 id="_1">代码结构</h2>
-<p>SDK由GYM环境类、游戏控制器和AI函数组成。</p>
-<h3 id="gympacmanenv">GYM环境类（PacmanEnv）</h3>
-<p>GYM环境类（PacmanEnv）维护了游戏局面的全量信息供AI调用。该类提供如下接口：</p>
+<p>SDK 由 GYM 环境类、游戏控制器和 AI 函数组成。</p>
+<h3 id="sdk_1">将 sdk 下载到本地及配置</h3>
+<ol>
+<li>安装并配置 git</li>
+<li>克隆远程仓库到本地（在终端输入）:<code>git clone &lt;repository_url&gt;</code></li>
+<li>配置 sdk 中的 core（在终端输入）:<code>git submodule update --remote core</code></li>
+</ol>
+<h3 id="gym-pacmanenv">GYM 环境类（PacmanEnv）</h3>
+<p>GYM 环境类（PacmanEnv）维护了游戏局面的全量信息供 AI 调用。该类提供如下接口：</p>
 <h4 id="reset">reset</h4>
 <p>reset 函数在每关开始时由 judger 调用。玩家将进入一个新的地图，吃豆人和三个幽灵会随机生成在地图的四个角落。该函数会返回一个包含新地图信息的 JSON 字符串。随后，judger 会将这个 JSON 字符串编码并发送给 AI。</p>
 <h4 id="ai_reset">ai_reset</h4>
 <p>此函数由 AI 调用，用于解码 judger 发送的信息并初始化本地地图。</p>
 <h4 id="render">render</h4>
-<p>传入mode="local"时可在本地终端生成地图，供选手调试使用。</p>
+<p>传入 mode="local"时可在本地终端生成地图，供选手调试使用。</p>
 <h4 id="step">step</h4>
-<p>TODO(zyc): step说明</p>
-<h3 id="controller">游戏控制器（Controller）</h3>
+<p>step 函数是环境更新的主函数，处理游戏逻辑，按照选手的输入更新游戏状态。</p>
+<blockquote>
+<p>具体逻辑的实现请参考 sdk 中 GymEnvironment.py 中的注释</p>
+</blockquote>
+<h3 id="controller">Controller</h3>
 <h4 id="_2">初始化</h4>
-<p>初始化时 judger 向0号玩家发送字符串"0"，向1号玩家发送字符串"1"，0号玩家先发送操作消息，1号玩家后发送操作消息。</p>
+<p>初始化时 judger 向 0 号玩家发送字符串"0"，向 1 号玩家发送字符串"1"，0 号玩家先发送操作消息，1 号玩家后发送操作消息。</p>
 <h4 id="run">run</h4>
-<p>run函数首先判断是否进入新的level，若进入新的level则读取judger传来的初始化信息并实例化整局游戏唯一的环境实例。</p>
-<p>若当前玩家为<b>0号玩家</b>，则先调用传入的ai函数，并将ai函数返回的操作序号传给judger
+<p>run 函数首先判断是否进入新的 level，若进入新的 level 则读取 judger 传来的初始化信息并实例化整局游戏唯一的环境实例。</p>
+<p>若当前玩家为<b>0 号玩家</b>，则先调用传入的 ai 函数，并将 ai 函数返回的操作序号传给 judger</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">pacman_op</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">,</span><span class="n">ai</span><span class="p">)</span> <span class="c1"># 当前玩家为吃豆人，则ai应该返回一个含1个元素的数组</span>
 </code></pre></div>
-或
+<p>或</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ghosts_op</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">,</span><span class="n">ai</span><span class="p">)</span> <span class="c1"># 当前玩家为幽灵，则ai返回一个含3个元素的数组</span>
 </code></pre></div>
-然后读取对方已经操作的消息
+<p>然后读取对方已经操作的消息</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">get_info</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span> <span class="c1"># 并不能读取到对方操作的具体内容，只是标记对方已经发送操作</span>
 </code></pre></div>
-最后读取judger传来的幽灵和吃豆人的操作信息，更新整局游戏唯一的环境实例。</p>
-<p>若当前玩家为<b>1号玩家</b>，则先读取对方已经操作的消息
+<p>最后读取 judger 传来的幽灵和吃豆人的操作信息，更新整局游戏唯一的环境实例。</p>
+<p>若当前玩家为<b>1 号玩家</b>，则先读取对方已经操作的消息</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">get_info</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span> <span class="c1"># 并不能读取到对方操作的具体内容，只是标记对方已经发送操作</span>
 </code></pre></div>
-然后调用传入的ai函数，并将ai函数返回的操作序号传给judger
+<p>然后调用传入的 ai 函数，并将 ai 函数返回的操作序号传给 judger</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">pacman_op</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">,</span><span class="n">ai</span><span class="p">)</span> <span class="c1"># 当前玩家为吃豆人，则ai应该返回一个含1个元素的数组</span>
 </code></pre></div>
-或
+<p>或</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">ghosts_op</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">,</span><span class="n">ai</span><span class="p">)</span> <span class="c1"># 当前玩家为幽灵，则ai返回一个含3个元素的数组</span>
-</code></pre></div></p>
-<p>最后读取judger传来的幽灵和吃豆人的操作信息，更新整局游戏唯一的环境实例。</p>
-<p><strong>注意若AI发送了不合理的操作号（比如5、-1等）则会被视为不进行移动</strong></p>
-<h3 id="ai">AI函数</h3>
-<p>一个输入为GameState类实例，输出为操作数组的函数。<strong>注意，请不要在函数中直接对传入的环境实例作修改。请使用deepcopy复制</strong></p>
+</code></pre></div>
+<p>最后读取 judger 传来的幽灵和吃豆人的操作信息，更新整局游戏唯一的环境实例。</p>
+<p><strong>注意若 AI 发送了不合理的操作号（比如 5、-1 等）则会被视为不进行移动</strong></p>
+<h3 id="ai">AI 函数</h3>
+<p>一个输入为 GameState 类实例，输出为操作数组的函数。<strong>注意，请不要在函数中直接对传入的环境实例作修改。请使用 deepcopy 复制</strong></p>
 <h2 id="_3">选手可获取的内容及获取方式</h2>
 <h3 id="_4">获取关卡号</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">level</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">level</span>
 </code></pre></div>
-返回类型 ：<code>int</code></p>
-<p>表示当前关卡号 </p>
+<p>返回类型 ：<code>int</code></p>
+<p>表示当前关卡号</p>
 <h3 id="_5">获取轮数</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">round</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">round</span>
 </code></pre></div>
-返回类型：<code>int</code></p>
+<p>返回类型：<code>int</code></p>
 <p>表示当前关卡进行到的轮数</p>
 <h3 id="_6">获取棋盘相关信息</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">board_size</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">board_size</span>
 </code></pre></div>
-返回类型：<code>int</code></p>
+<p>返回类型：<code>int</code></p>
 <p>表示当前棋盘大小</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">board</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">board</span>
 </code></pre></div>
-返回类型：<code>np.ndarray</code></p>
-<p>表示棋盘，棋盘中元素 
+<p>返回类型：<code>np.ndarray</code></p>
+<p>表示棋盘，棋盘中元素</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>0代表墙
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>1代表空地
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>2代表知识金币
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>3代表双倍荣耀币
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>4代表疾风之翼
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>5代表智引磁石
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>6代表护学之盾
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>7代表智慧圣典
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>2代表普通豆子
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>3代表奖励豆子
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>4代表加速豆子
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>5代表磁铁豆子
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>6代表护盾豆子
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>7代表*2豆子
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>8代表传送门
-</code></pre></div></p>
+</code></pre></div>
 <h3 id="_7">获取吃豆人相关信息</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">pacman_skill_status</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">pacman_skill_status</span>
 </code></pre></div>
-返回类型：<code>list[int]</code></p>
-<p>表示吃豆人当前拥有的技能，数组共4个元素，分别表示<b>DOUBLE_SCORE技能、SPEED_UP技能、MAGNET技能的剩余轮数和当前拥有的SHIELD的数量</b></p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">pacman_pos</span>
+<p>返回类型：<code>list[int]</code></p>
+<p>表示吃豆人当前拥有的技能，数组共 4 个元素，分别表示<b>DOUBLE_SCORE 技能、SPEED_UP 技能、MAGNET 技能的剩余轮数和当前拥有的 SHIELD 的数量</b></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">pacman_pos</span>
 </code></pre></div>
-返回类型：<code>np.ndarray[int]</code></p>
-<p>长度为2， <code>gamestate.pacman_pos[0]</code> 和 <code>gamestate.pacman_pos[1]</code> 分别表示吃豆人的横纵坐标</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>gamestate.pacman_score
+<p>返回类型：<code>np.ndarray[int]</code></p>
+<p>长度为 2， <code>gamestate.pacman_pos[0]</code> 和 <code>gamestate.pacman_pos[1]</code> 分别表示吃豆人的横纵坐标</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>gamestate.pacman_score
 </code></pre></div>
-返回类型：<code>int</code></p>
+<p>返回类型：<code>int</code></p>
 <p>表示当前吃豆人的得分</p>
 <h3 id="_8">获取幽灵相关信息</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>gamestate.ghosts_pos
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>gamestate.ghosts_pos
 </code></pre></div>
-返回类型：<code>np.ndarray[np.ndarray[int]]</code></p>
-<p>长度为3，表示三个幽灵的坐标</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>gamestate.ghosts_score
+<p>返回类型：<code>np.ndarray[np.ndarray[int]]</code></p>
+<p>长度为 3，表示三个幽灵的坐标</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>gamestate.ghosts_score
 </code></pre></div>
-返回类型：<code>int</code></p>
+<p>返回类型：<code>int</code></p>
 <p>表示当前幽灵的得分</p>
 <h3 id="_9">获取传送门相关信息</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>gamestate.portal_available
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>gamestate.portal_available
 </code></pre></div>
-返回类型：<code>bool</code></p>
+<p>返回类型：<code>bool</code></p>
 <p>表示当前传送门是否开启</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>gamestate.portal_coord
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>gamestate.portal_coord
 </code></pre></div>
-返回类型：<code>np.ndarray[int]</code></p>
-<p>长度为2， <code>gamestate.portal_coord[0]</code> 和 <code>gamestate.portal_coord[1]</code> 分别表示传送门的横纵坐标</p>
-<p>TODO(zyc): 完善除gamestate外其他接口的说明</p>
+<p>返回类型：<code>np.ndarray[int]</code></p>
+<p>长度为 2， <code>gamestate.portal_coord[0]</code> 和 <code>gamestate.portal_coord[1]</code> 分别表示传送门的横纵坐标</p>
+<h3 id="_10">获取空间信息</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>gamestate.space_info
+</code></pre></div>
+<p>返回类型：<code>dict</code></p>
+<p>包含<code>observation_space</code>、<code>pacman_action_space</code>、<code>ghost_action_space</code>三个键，分别表示空间的观察空间、吃豆人的动作空间和幽灵的动作空间</p>
+<p>示例：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">{</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="s2">&quot;observation_space&quot;</span><span class="p">:</span> <span class="n">spaces</span><span class="o">.</span><span class="n">MultiDiscrete</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="o">*</span> <span class="n">SPACE_CATEGORY</span><span class="p">),</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="s2">&quot;pacman_action_space&quot;</span><span class="p">:</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Discrete</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    <span class="s2">&quot;ghost_action_space&quot;</span><span class="p">:</span> <span class="n">spaces</span><span class="o">.</span><span class="n">MultiDiscrete</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="p">}</span>
+</code></pre></div>
 
 
 
@@ -845,9 +866,10 @@
     </span>
     <nav>
       
+        <a href="mailto:1455854619@qq.com">zyc</a>, 
         <a href="mailto:wang-xt23@mails.tsinghua.edu.cn">wangxt111</a>, 
-        <a href="mailto:17701248665@189.cn">WilmaLiu2005</a>, 
-        <a href="mailto:2023012124@secoder.net">汪馨瞳</a>
+        <a href="mailto:2023012124@secoder.net">汪馨瞳</a>, 
+        <a href="mailto:17701248665@189.cn">WilmaLiu2005</a>
     </nav>
   </span>
 
