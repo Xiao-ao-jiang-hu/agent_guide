@@ -495,6 +495,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#sdk_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDK的下载及配置
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       代码结构
@@ -503,15 +512,6 @@
   
     <nav class="md-nav" aria-label="代码结构">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      将 sdk 下载到本地及配置
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#gym-pacmanenv" class="md-nav__link">
@@ -567,11 +567,11 @@
           <li class="md-nav__item">
   <a href="#controller" class="md-nav__link">
     <span class="md-ellipsis">
-      Controller
+      游戏控制器（Controller）
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Controller">
+    <nav class="md-nav" aria-label="游戏控制器（Controller）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -708,14 +708,16 @@
 <p>本文档是吃豆人和幽灵的 SDK 使用说明</p>
 <p>吃豆人 SDK 仓库：<a href="https://github.com/PacMan-Logic/PacmanSDK-python">https://github.com/PacMan-Logic/PacmanSDK-python</a></p>
 <p>幽灵 SDK 仓库：<a href="https://github.com/PacMan-Logic/GhostsSDK-python">https://github.com/PacMan-Logic/GhostsSDK-python</a></p>
+<h2 id="sdk_1">SDK的下载及配置</h2>
+<ol>
+<li>安装并配置git</li>
+<li>克隆远程仓库到本地（在终端输入）: <code>git clone &lt;repository_url&gt;</code></li>
+<li>配置sdk中的core（进入SDK所在目录并在终端输入）: 
+<code>git submodule init</code> <code>git submodule update</code></li>
+<li>后续更新core（在终端输入）: <code>git submodule update --remote core</code></li>
+</ol>
 <h2 id="_1">代码结构</h2>
 <p>SDK 由 GYM 环境类、游戏控制器和 AI 函数组成。</p>
-<h3 id="sdk_1">将 sdk 下载到本地及配置</h3>
-<ol>
-<li>安装并配置 git</li>
-<li>克隆远程仓库到本地（在终端输入）:<code>git clone &lt;repository_url&gt;</code></li>
-<li>配置 sdk 中的 core（在终端输入）:<code>git submodule update --remote core</code></li>
-</ol>
 <h3 id="gym-pacmanenv">GYM 环境类（PacmanEnv）</h3>
 <p>GYM 环境类（PacmanEnv）维护了游戏局面的全量信息供 AI 调用。该类提供如下接口：</p>
 <h4 id="reset">reset</h4>
@@ -729,7 +731,7 @@
 <blockquote>
 <p>具体逻辑的实现请参考 sdk 中 GymEnvironment.py 中的注释</p>
 </blockquote>
-<h3 id="controller">Controller</h3>
+<h3 id="controller">游戏控制器（Controller）</h3>
 <h4 id="_2">初始化</h4>
 <p>初始化时 judger 向 0 号玩家发送字符串"0"，向 1 号玩家发送字符串"1"，0 号玩家先发送操作消息，1 号玩家后发送操作消息。</p>
 <h4 id="run">run</h4>
@@ -779,12 +781,12 @@
 <p>表示棋盘，棋盘中元素</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>0代表墙
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>1代表空地
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>2代表普通豆子
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>3代表奖励豆子
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>4代表加速豆子
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>5代表磁铁豆子
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>6代表护盾豆子
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>7代表*2豆子
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>2代表知识金币
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>3代表双倍荣耀币
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>4代表疾风之翼
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>5代表智引磁石
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>6代表护学之盾
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>7代表智慧圣典
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>8代表传送门
 </code></pre></div>
 <h3 id="_7">获取吃豆人相关信息</h3>
