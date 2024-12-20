@@ -6,15 +6,16 @@
 
 幽灵 SDK 仓库：[https://github.com/PacMan-Logic/GhostsSDK-python](https://github.com/PacMan-Logic/GhostsSDK-python)
 
+## SDK的下载及配置
+1. 安装并配置git
+2. 克隆远程仓库到本地（在终端输入）: `git clone <repository_url>`
+3. 配置sdk中的core（进入SDK所在目录并在终端输入）: 
+`git submodule init` `git submodule update`
+4. 后续更新core（在终端输入）: `git submodule update --remote core`
+
 ## 代码结构
 
 SDK 由 GYM 环境类、游戏控制器和 AI 函数组成。
-
-### 将 sdk 下载到本地及配置
-
-1. 安装并配置 git
-2. 克隆远程仓库到本地（在终端输入）:`git clone <repository_url>`
-3. 配置 sdk 中的 core（在终端输入）:`git submodule update --remote core`
 
 ### GYM 环境类（PacmanEnv）
 
@@ -38,7 +39,7 @@ step 函数是环境更新的主函数，处理游戏逻辑，按照选手的输
 
 > 具体逻辑的实现请参考 sdk 中 GymEnvironment.py 中的注释
 
-### Controller
+### 游戏控制器（Controller）
 
 #### 初始化
 
@@ -137,12 +138,12 @@ gamestate.board
 ```
 0代表墙
 1代表空地
-2代表普通豆子
-3代表奖励豆子
-4代表加速豆子
-5代表磁铁豆子
-6代表护盾豆子
-7代表*2豆子
+2代表知识金币
+3代表双倍荣耀币
+4代表疾风之翼
+5代表智引磁石
+6代表护学之盾
+7代表智慧圣典
 8代表传送门
 ```
 
