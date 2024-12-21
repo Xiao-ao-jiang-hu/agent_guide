@@ -44,9 +44,7 @@
 如果吃豆人被幽灵吃掉了一次，会被减掉 60 分。
 
 如果吃豆人提前通关（包括传送门传送或者吃掉所有豆子），会获得大小为
-$$
-(MaxRound(level) - CurrentRound) \times 1
-$$
+$(MaxRound(level) - CurrentRound) \times 1$
 的时间因子加分。
 
 ### 幽灵
