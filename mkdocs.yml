@@ -33,6 +33,7 @@ markdown_extensions:
       generic: true
 
 extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML
   - javascripts/katex.js
   - https://unpkg.com/browse/katex@0.16.11/dist/katex.min.js
   - https://unpkg.com/browse/katex@0.16.11/dist/contrib/auto-render.min.js
