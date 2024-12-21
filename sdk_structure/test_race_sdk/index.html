@@ -766,7 +766,7 @@
 <h4 id="num_to_coord-coord_to_num">num_to_coord 和coord_to_num</h4>
 <p>分别为将操作序号转换为坐标，和将坐标转换为操作序号。
 操作坐标的定义为：<code>[x1, y1, x2, y2]</code>代表交换坐标<code>[x1, y1]</code>和<code>[x2, y2]</code>的块。
-操作序号定义为 $ y_2 + x_2 \times size + y_1 \times size^2 + x_1 \times size^3 $</p>
+操作序号定义为 <span class="arithmatex">\(y_2 + x_2 \times size + y_1 \times size^2 + x_1 \times size^3\)</span></p>
 <h3 id="controller">Controller</h3>
 <p>在初始化时读取judger传来的初始化信息并实例化整局游戏唯一的环境实例。run将调用传入的ai函数，并将ai函数返回的操作序号传给judger，并读取对方操作。</p>
 <h3 id="ai">AI函数</h3>
@@ -791,7 +791,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年10月14日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2024年12月21日</span>
   </span>
 
     
@@ -857,6 +857,8 @@
     
     
       <script src="../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       
         <script src="../../javascripts/katex.js"></script>
       
