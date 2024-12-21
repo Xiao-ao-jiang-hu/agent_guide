@@ -31,7 +31,7 @@ GYM环境类维护了游戏局面的全量信息。该类提供如下接口：
 #### num_to_coord 和coord_to_num
 分别为将操作序号转换为坐标，和将坐标转换为操作序号。
 操作坐标的定义为：`[x1, y1, x2, y2]`代表交换坐标`[x1, y1]`和`[x2, y2]`的块。
-操作序号定义为 $ y_2 + x_2 \times size + y_1 \times size^2 + x_1 \times size^3 $
+操作序号定义为 $y_2 + x_2 \times size + y_1 \times size^2 + x_1 \times size^3$
 
 
 ### Controller
