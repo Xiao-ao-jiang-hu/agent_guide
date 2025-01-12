@@ -4,7 +4,7 @@ nav:
   - 平台介绍: platform.md
   # - 游戏概述: 
   #   - 游戏简介: pacman.md
-  #   - 通信文档: pacman_api.md
+  #   - 游戏开发者文档: pacman_api.md
   - sdk结构:
     - 总览: sdk_structure/sdk.md
     - 热身赛: sdk_structure/test_race_sdk.md

@@ -23,17 +23,29 @@ GYM 环境类（PacmanEnv）维护了游戏局面的全量信息供 AI 调用。
 
 #### reset
 
+* Returns: return_dict(dict)
+
 reset 函数在每关开始时由 judger 调用。玩家将进入一个新的地图，吃豆人和三个幽灵会随机生成在地图的四个角落。该函数会返回一个包含新地图信息的 JSON 字符串。随后，judger 会将这个 JSON 字符串编码并发送给 AI。
 
 #### ai_reset
 
-此函数由 AI 调用，用于解码 judger 发送的信息并初始化本地地图。
+* Args: dict(dict)
+
+在棋盘改变时解码 judger 发送的初始化信息，保证 ai 的 PacmanEnv 环境类与后端的 PacmanEnv 环境类的一致性。
 
 #### render
+
+* Args: mode(string) 为"logic"或"local"
+
+* Returns: return_dict(dict)
 
 传入 mode="local"时可在本地终端生成地图，供选手调试使用。
 
 #### step
+
+* Args: pacmanAction(int), ghostAction(List[int])
+
+* Returns: (level_change(bool), eat_all_beans(bool))(tuple)  level_change表示是否切换到下一关，eat_all_beans表示本关是否吃完全部的豆子
 
 step 函数是环境更新的主函数，处理游戏逻辑，按照选手的输入更新游戏状态。
 
@@ -103,7 +115,7 @@ ghosts_op(self.env,ai) # 当前玩家为幽灵，则ai返回一个含3个元素�
 gamestate.level
 ```
 
-返回类型 ：`int`
+为`int`类型的值
 
 表示当前关卡号
 
@@ -113,7 +125,7 @@ gamestate.level
 gamestate.round
 ```
 
-返回类型：`int`
+为`int`类型的值
 
 表示当前关卡进行到的轮数
 
@@ -123,7 +135,7 @@ gamestate.round
 gamestate.board_size
 ```
 
-返回类型：`int`
+为`int`类型的值
 
 表示当前棋盘大小
 
@@ -131,7 +143,7 @@ gamestate.board_size
 gamestate.board
 ```
 
-返回类型：`np.ndarray`
+为`np.ndarray`类型的值
 
 表示棋盘，棋盘中元素
 
@@ -153,7 +165,7 @@ gamestate.board
 gamestate.pacman_skill_status
 ```
 
-返回类型：`list[int]`
+为`list[int]`类型的值
 
 表示吃豆人当前拥有的技能，数组共 4 个元素，分别表示<b>DOUBLE_SCORE 技能、SPEED_UP 技能、MAGNET 技能的剩余轮数和当前拥有的 SHIELD 的数量</b>
 
@@ -161,61 +173,61 @@ gamestate.pacman_skill_status
 gamestate.pacman_pos
 ```
 
-返回类型：`np.ndarray[int]`
+为`np.ndarray[int]`类型的值
 
 长度为 2， `gamestate.pacman_pos[0]` 和 `gamestate.pacman_pos[1]` 分别表示吃豆人的横纵坐标
 
-```
+```py
 gamestate.pacman_score
 ```
 
-返回类型：`int`
+为`int`类型的值
 
 表示当前吃豆人的得分
 
 ### 获取幽灵相关信息
 
-```
+```py
 gamestate.ghosts_pos
 ```
 
-返回类型：`np.ndarray[np.ndarray[int]]`
+为`np.ndarray[np.ndarray[int]]`类型的值
 
 长度为 3，表示三个幽灵的坐标
 
-```
+```py
 gamestate.ghosts_score
 ```
 
-返回类型：`int`
+为`int`类型的值
 
 表示当前幽灵的得分
 
 ### 获取传送门相关信息
 
-```
+```py
 gamestate.portal_available
 ```
 
-返回类型：`bool`
+为`bool`类型的值
 
 表示当前传送门是否开启
 
-```
+```py
 gamestate.portal_coord
 ```
 
-返回类型：`np.ndarray[int]`
+为`np.ndarray[int]`类型的值
 
 长度为 2， `gamestate.portal_coord[0]` 和 `gamestate.portal_coord[1]` 分别表示传送门的横纵坐标
 
 ### 获取空间信息
 
-```
+```py
 gamestate.space_info
 ```
 
-返回类型：`dict`
+为`dict`类型的值
 
 包含`observation_space`、`pacman_action_space`、`ghost_action_space`三个键，分别表示空间的观察空间、吃豆人的动作空间和幽灵的动作空间
 
