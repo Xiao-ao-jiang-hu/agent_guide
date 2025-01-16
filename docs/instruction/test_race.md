@@ -71,7 +71,7 @@ def ai(env: EliminationEnv):
 ## stage3：炼丹
 stage2已经是一个较优解，但距离最优解仍有距离。首先，对于状态空间的遍历不够彻底。其次，贪心算法在博弈中也很难找到最优解。我们希望使用机器学习方法对最优策略进行求解。
 
-我们以DQN为例讲解使用sdk进行模型训练的过程。我们先使用pytorch实现DQN模型：
+我们以DQN为例讲解使用sdk进行模型训练的过程。我们先使用pytorch实现状动作价值网络：
 ```python
 # dqn.py
 class DQN(nn.Module):

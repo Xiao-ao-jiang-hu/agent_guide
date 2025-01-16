@@ -595,5 +595,145 @@ ai_func = GhostAI().choose_moves
 __all__ = ["ai_func"]
 ```
 ## stage3：炼丹
+stage2已经是一个较优解，但距离最优解仍有距离。首先，对于状态空间的遍历不够彻底。其次，固定在博弈中也很难事最优解。我们希望使用机器学习方法对最优策略进行求解。
+
+我们以DQN为例介绍使用Pacman SDK中的Gym Environment进行深度强化学习训练的流程。
+
+首先我们设计对局面的表示。此处的实现为将棋盘、幽灵位置、吃豆人位置和出口位置构成的四通道二位张量和将游戏阶段、回合数、棋盘大小和出口是否激活重复十次构成的一维向量作为一个局面的表示。该表示可以通过`state_dict_to_tensor`方法由step函数返回的state获得。
+
+接着使用pytorch实现动作价值网络：
+```python
+# model.py
+class PacmanNet(nn.Module):
+    def __init__(self, input_channel_num, num_actions, extra_size):
+        super().__init__()
+        self.channels = input_channel_num
+        self.embeddings = nn.ModuleList(
+            [nn.Embedding(9, 16) for _ in range(input_channel_num)])
+        self.conv1 = nn.Conv2d(64, 64, kernel_size=8, stride=4)
+        self.conv2 = nn.Conv2d(64, 64, kernel_size=4, stride=2)
+        self.bn = nn.BatchNorm2d(64)
+        self.conv3 = nn.Conv2d(64, 64, kernel_size=3, stride=2)
+
+        self.encoder = nn.Linear(extra_size, 64)
+
+        self.fc1 = nn.Linear(64, 32)
+        self.fc2 = nn.Linear(32, num_actions)
+
+    def forward(self, x, y):
+        B, C, H, W = x.shape
+        embedded_channels = []
+        for i in range(self.channels):
+            flattened_channel = x[:, i, :, :].view(B, -1).long()
+            embedded_channel = self.embeddings[i](flattened_channel)
+            embedded_channel = embedded_channel.view(
+                B, 16, H, W)
+            embedded_channels.append(embedded_channel)
+        # Concatenate along the channel dimension
+        x = torch.cat(embedded_channels, dim=1)
+
+        x = F.relu(self.conv1(x))
+        x = F.relu(self.conv2(x))
+        x = self.bn(x)
+        x = F.relu(self.conv3(x))
+        y = F.sigmoid(self.encoder(y))
+        x = x.view(x.size(0), -1)
+        x = F.relu(self.fc1(x+y))
+        return self.fc2(x)
+```
+
+随后实现epsilon-greedy采样：
+```python
+# train.py
+
+# epsilon-greedy policy for rollout
+def select_action_ghost(state, extra, epsilon, policy_net):
+    if np.random.rand() < epsilon:
+        return np.random.randint(size=3, low=0, high=4)
+    else:
+        with torch.no_grad():
+            values = policy_net(
+                state.to(device), extra.to(device)).reshape(-1, 5)
+            # print(f"{values.shape=}")
+            return torch.argmax(values, dim=1).cpu().numpy()
+
+
+def select_action_pacman(state, extra, epsilon, policy_net):
+    if np.random.rand() < epsilon:
+        return np.random.randint(low=0, high=4)
+    else:
+        with torch.no_grad():
+            return torch.argmax(policy_net(state.to(device), extra.to(device))).cpu().item()
+
+```
+
+最后我们实现Q-learning算法：
+```python
+# train.py
+
+# training iteration
+if __name__ == "__main__":
+    num_episodes = 1000
+    epsilon = EPSILON_START
+    for episode in range(num_episodes):
+        state = env.reset(mode="local")
+        state, extra = state_dict_to_tensor(state)
+        # print(state.shape, extra.shape)
+
+        for t in range(1000):
+            action1 = select_action_pacman(state, extra, epsilon, policy_net_pacman)
+            action2 = select_action_ghost(
+                state, extra, epsilon, policy_net_ghost)
+            next_state, reward1, reward2, done, _ = env.step(action1, action2)
+            env.render('local')
+            next_state, next_extra = state_dict_to_tensor(next_state)
+            # next_state = torch.tensor(
+            # next_state, dtype=torch.float32).unsqueeze(0)
+            reward1 = torch.tensor([reward1], dtype=torch.float32)
+            reward2 = torch.tensor([reward2], dtype=torch.float32)
+            # print(next_state.shape, next_extra.shape)
+            print(reward1.item(), reward2.tolist())
+
+
+            memory.append(
+                Transition(
+                    state,
+                    extra,
+                    torch.tensor([[action1]]),
+                    torch.tensor([[action2]]),
+                    next_state,
+                    next_extra,
+                    reward1,
+                    reward2,
+                )
+            )
+            if len(memory) > MEMORY_SIZE:
+                memory.pop(0)
+
+            state = next_state
+
+            optimize_model()
+
+            if done:
+                break
+
+        if episode % TARGET_UPDATE == 0:
+            target_net_pacman.load_state_dict(policy_net_pacman.state_dict())
+            target_net_ghost.load_state_dict(policy_net_ghost.state_dict())
+            torch.save(policy_net_pacman.state_dict(), "pacman.pth")
+            torch.save(policy_net_ghost.state_dict(), "ghost.pth")
+
+        epsilon = max(EPSILON_END, EPSILON_START - episode / EPSILON_DECAY)
+
+```
 
 ## stage4：可能的改进
+## stage4：可能的改进
+
+前述三个阶段提供了几个非常简单的设计 agent 的方法，但仍有很多改进空间。例如，即使不采用深度学习方法，也可以使用对抗搜索（如 Minimax 算法）和蒙特卡洛树搜索（MCTS）等方法来搜索最优解。这些方法在经典的博弈问题中表现优异，可以为游戏提供有效的策略。
+
+另外，除了简单地使用DQN，还可以尝试其他强化学习算法，如 Proximal Policy Optimization (PPO)、Advantage Actor-Critic (A2C) 等。这些算法在处理复杂策略时表现更好，可能会带来更优的效果。
+
+此外，Pacman 和 Ghosts 是对立的多智能体系统。可以研究多智能体强化学习（MARL）方法，使得各个智能体之间能够更好地协作或对抗，从而提升整体表现。
+
+本文仅供大家上手这个比赛，期望大家能够通过改进前述方法或使用更优的方法取得更好的效果。
