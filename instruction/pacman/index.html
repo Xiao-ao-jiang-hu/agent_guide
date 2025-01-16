@@ -1470,7 +1470,7 @@
 <p>stage2已经是一个较优解，但距离最优解仍有距离。首先，对于状态空间的遍历不够彻底。其次，固定在博弈中也很难事最优解。我们希望使用机器学习方法对最优策略进行求解。</p>
 <p>我们以DQN为例介绍使用Pacman SDK中的Gym Environment进行深度强化学习训练的流程。</p>
 <p>首先我们设计对局面的表示。此处的实现为将棋盘、幽灵位置、吃豆人位置和出口位置构成的四通道二位张量和将游戏阶段、回合数、棋盘大小和出口是否激活重复十次构成的一维向量作为一个局面的表示。该表示可以通过<code>state_dict_to_tensor</code>方法由step函数返回的state获得。</p>
-<p>接着使用pytorch实现动作价值网络：
+<p>接着使用pytorch实现动作价值网络（此处仅展示Pacman动作价值网络的实现）：
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># model.py</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">PacmanNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_channel_num</span><span class="p">,</span> <span class="n">num_actions</span><span class="p">,</span> <span class="n">extra_size</span><span class="p">):</span>
