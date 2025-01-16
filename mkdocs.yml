@@ -3,8 +3,8 @@ nav:
   - 文档说明: index.md
   - 平台介绍: platform.md
   - 游戏文档: 
-    - Pacman游戏简介: document/pacman.md
-    - Pacman游戏开发者文档: document/pacman_api.md
+    - Rollman游戏简介: document/pacman.md
+    - Rollman通信文档: document/pacman_api.md
   - sdk结构:
     - 总览: sdk_structure/sdk.md
     - 热身赛: sdk_structure/test_race_sdk.md

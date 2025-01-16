@@ -1,6 +1,6 @@
-# 吃豆人 SDK 引导
+# Rollman SDK 引导
 
-本文档是吃豆人和幽灵的 SDK 使用说明
+本文档是Rollman和幽灵的 SDK 使用说明
 
 吃豆人 SDK 仓库：[https://github.com/PacMan-Logic/PacmanSDK-python](https://github.com/PacMan-Logic/PacmanSDK-python)
 
@@ -25,7 +25,7 @@ GYM 环境类（PacmanEnv）维护了游戏局面的全量信息供 AI 调用。
 
 * Returns: return_dict(dict)
 
-reset 函数在每关开始时由 judger 调用。玩家将进入一个新的地图，吃豆人和三个幽灵会随机生成在地图的四个角落。该函数会返回一个包含新地图信息的 JSON 字符串。随后，judger 会将这个 JSON 字符串编码并发送给 AI。
+reset 函数在每关开始时由 judger 调用。玩家将进入一个新的地图，卷王和三个幽灵会随机生成在地图的四个角落。该函数会返回一个包含新地图信息的 JSON 字符串。随后，judger 会将这个 JSON 字符串编码并发送给 AI。
 
 #### ai_reset
 
@@ -64,7 +64,7 @@ run 函数首先判断是否进入新的 level，若进入新的 level 则读取
 若当前玩家为<b>0 号玩家</b>，则先调用传入的 ai 函数，并将 ai 函数返回的操作序号传给 judger
 
 ```py
-pacman_op(self.env,ai) # 当前玩家为吃豆人，则ai应该返回一个含1个元素的数组
+pacman_op(self.env,ai) # 当前玩家为卷王，则ai应该返回一个含1个元素的数组
 ```
 
 或
@@ -79,7 +79,7 @@ ghosts_op(self.env,ai) # 当前玩家为幽灵，则ai返回一个含3个元素�
 get_info = input() # 并不能读取到对方操作的具体内容，只是标记对方已经发送操作
 ```
 
-最后读取 judger 传来的幽灵和吃豆人的操作信息，更新整局游戏唯一的环境实例。
+最后读取 judger 传来的幽灵和卷王的操作信息，更新整局游戏唯一的环境实例。
 
 若当前玩家为<b>1 号玩家</b>，则先读取对方已经操作的消息
 
@@ -90,7 +90,7 @@ get_info = input() # 并不能读取到对方操作的具体内容，只是标�
 然后调用传入的 ai 函数，并将 ai 函数返回的操作序号传给 judger
 
 ```py
-pacman_op(self.env,ai) # 当前玩家为吃豆人，则ai应该返回一个含1个元素的数组
+pacman_op(self.env,ai) # 当前玩家为卷王，则ai应该返回一个含1个元素的数组
 ```
 
 或
@@ -99,7 +99,7 @@ pacman_op(self.env,ai) # 当前玩家为吃豆人，则ai应该返回一个含1�
 ghosts_op(self.env,ai) # 当前玩家为幽灵，则ai返回一个含3个元素的数组
 ```
 
-最后读取 judger 传来的幽灵和吃豆人的操作信息，更新整局游戏唯一的环境实例。
+最后读取 judger 传来的幽灵和卷王的操作信息，更新整局游戏唯一的环境实例。
 
 **注意若 AI 发送了不合理的操作号（比如 5、-1 等）则会被视为不进行移动**
 
@@ -159,7 +159,15 @@ gamestate.board
 8代表传送门
 ```
 
-### 获取吃豆人相关信息
+```py
+gamestate.beannumber
+```
+
+为`int`类型的值
+
+表示当前棋盘的总豆子数
+
+### 获取卷王相关信息
 
 ```py
 gamestate.pacman_skill_status
@@ -167,7 +175,7 @@ gamestate.pacman_skill_status
 
 为`list[int]`类型的值
 
-表示吃豆人当前拥有的技能，数组共 4 个元素，分别表示<b>DOUBLE_SCORE 技能、SPEED_UP 技能、MAGNET 技能的剩余轮数和当前拥有的 SHIELD 的数量</b>
+表示卷王当前拥有的技能，数组共 4 个元素，分别表示<b>DOUBLE_SCORE 技能、SPEED_UP 技能、MAGNET 技能的剩余轮数和当前拥有的 SHIELD 的数量</b>
 
 ```py
 gamestate.pacman_pos
@@ -175,7 +183,7 @@ gamestate.pacman_pos
 
 为`np.ndarray[int]`类型的值
 
-长度为 2， `gamestate.pacman_pos[0]` 和 `gamestate.pacman_pos[1]` 分别表示吃豆人的横纵坐标
+长度为 2， `gamestate.pacman_pos[0]` 和 `gamestate.pacman_pos[1]` 分别表示卷王的横纵坐标
 
 ```py
 gamestate.pacman_score
@@ -183,7 +191,7 @@ gamestate.pacman_score
 
 为`int`类型的值
 
-表示当前吃豆人的得分
+表示当前卷王的得分
 
 ### 获取幽灵相关信息
 
@@ -229,7 +237,7 @@ gamestate.space_info
 
 为`dict`类型的值
 
-包含`observation_space`、`pacman_action_space`、`ghost_action_space`三个键，分别表示空间的观察空间、吃豆人的动作空间和幽灵的动作空间
+包含`observation_space`、`pacman_action_space`、`ghost_action_space`三个键，分别表示空间的观察空间、卷王的动作空间和幽灵的动作空间
 
 示例：
 
