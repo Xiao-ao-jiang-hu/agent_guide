@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>pacman.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E5%90%83%E8%B1%86%E4%BA%BA%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97">吃豆人开发指南</h1>
+<p>本文档为吃豆人的开发指南。本文档基于热身赛sdk进行开发，sdk的使用说明可以参考引导文档sdk部分的对应文档。</p>
+<h2 id="stage1-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%83%BD%E8%BF%90%E8%A1%8C%E7%9A%84ai">stage1: 实现一个能运行的ai</h2>
+<h3 id="%E5%90%83%E8%B1%86%E4%BA%BA">吃豆人</h3>
+<p>我们首先实现一个能够在平台上运行的agent。</p>
+<p>根据sdk的文档，我们需要实现一个ai函数，该函数接收一个GameState类型的对象，返回一个<b>长度为1</b>的数组，数组元素为<code>[0, 4]</code>之间的整数。我们可以使用随机采样实现该函数：</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># ai.py</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ai_func</span><span class="hljs-params">(game_state: GameState)</span>:</span>
+    <span class="hljs-string">"""
+    Args:
+        game_state (GameState): 当前的游戏局面对象
+
+    Returns:
+        list: 包含一个操作序号的数组，范围在[0, 4]之间
+    """</span>
+    action = random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>)
+    <span class="hljs-keyword">return</span> [action]
+</div></code></pre>
+<h3 id="%E5%B9%BD%E7%81%B5">幽灵</h3>
+<p>我们首先实现一个能够在平台上运行的agent。</p>
+<p>根据sdk的文档，我们需要实现一个ai函数，该函数接收一个GameState类型的对象，返回一个<b>长度为3</b>的数组，数组元素为<code>[0, 4]</code>之间的整数。我们可以使用随机采样实现该函数：</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># ai.py</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ai</span><span class="hljs-params">(game_state: GameState)</span>:</span>
+    <span class="hljs-string">"""
+    Args:
+        game_state (GameState): 当前的游戏局面对象
+
+    Returns:
+        list: 包含一个操作序号的数组，范围在[0, 4]之间
+    """</span>
+    action = [random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(<span class="hljs-number">3</span>)]
+    <span class="hljs-keyword">return</span> action
+</div></code></pre>
+<p>此时我们已经实现了一个能运行的ai，但是很明显随机移动的ai不足以取得好的效果，下面我们实现一个有策略的ai。</p>
+<h2 id="stage2%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%89%E7%AD%96%E7%95%A5%E7%9A%84ai">stage2：实现一个有策略的ai</h2>
+<p>我们已经在gamedata.py文件中定义了很多封装与抽象，你可以直接使用来简化你的代码逻辑。</p>
+<h3 id="%E5%90%83%E8%B1%86%E4%BA%BA">吃豆人</h3>
+<p>我们可以实现一个基于状态机的AI来控制吃豆人。这个AI会根据当前游戏局面，动态切换不同的行为状态，并使用评分函数来选择最优的移动方向。</p>
+<p>主要的状态包括:</p>
+<ul>
+<li>COLLECT: 收集普通豆子模式，在安全时主动寻找并吃掉普通豆子</li>
+<li>ESCAPE: 逃离幽灵模式，当检测到附近有幽灵威胁时，优先考虑逃离</li>
+<li>BONUS: 收集特殊豆子模式，发现高价值的特殊道具时会优先获取</li>
+<li>GETOUT: 逃离传送门模式，在合适的时机通过传送门进入下一关</li>
+</ul>
+<p>AI的主要功能包括:</p>
+<ol>
+<li>状态更新</li>
+</ol>
+<ul>
+<li>根据幽灵距离、特殊豆子位置、护盾状态等因素动态切换状态</li>
+<li>在不同状态下使用不同的评分权重</li>
+</ul>
+<ol start="2">
+<li>路径规划</li>
+</ol>
+<ul>
+<li>使用A*算法进行路径搜索</li>
+<li>考虑墙壁、传送门等障碍物</li>
+</ul>
+<ol start="3">
+<li>位置评估</li>
+</ol>
+<ul>
+<li>计算幽灵威胁程度</li>
+<li>评估周围豆子的价值</li>
+<li>考虑历史访问记录避免重复移动</li>
+<li>根据当前状态调整评分权重</li>
+</ul>
+<ol start="4">
+<li>移动决策</li>
+</ol>
+<ul>
+<li>评估所有可能的移动方向</li>
+<li>选择评分最高的移动方向</li>
+<li>更新历史记录</li>
+</ul>
+<p>完整的代码实现如下:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> core.gamedata <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
+<span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AIState</span><span class="hljs-params">(Enum)</span>:</span>
+    COLLECT = <span class="hljs-string">"COLLECT"</span>  <span class="hljs-comment"># 收集普通豆子模式</span>
+    ESCAPE = <span class="hljs-string">"ESCAPE"</span>  <span class="hljs-comment"># 逃离幽灵模式</span>
+    BONUS = <span class="hljs-string">"BONUS"</span>  <span class="hljs-comment"># 收集特殊豆子模式</span>
+    GETOUT = <span class="hljs-string">"GETOUT"</span>  <span class="hljs-comment"># 逃离传送门模式</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PacmanAI</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        self.board_size = <span class="hljs-literal">None</span>
+        self.current_state = AIState.COLLECT
+        self.path = []
+        <span class="hljs-comment"># 历史记录</span>
+        self.history = deque(maxlen=<span class="hljs-number">20</span>)
+        self.init_bean_num = <span class="hljs-number">0</span>
+
+        <span class="hljs-comment"># 动态参数</span>
+        self.GHOST_DANGER_DISTANCE = <span class="hljs-number">5</span>
+        self.BONUS_BEAN_PRIORITY = <span class="hljs-number">2.0</span>
+
+        <span class="hljs-comment"># 状态权重</span>
+        self.weights = {
+            AIState.COLLECT: {<span class="hljs-string">"ghost"</span>: <span class="hljs-number">1.0</span>, <span class="hljs-string">"bean"</span>: <span class="hljs-number">1.5</span>, <span class="hljs-string">"bonus"</span>: <span class="hljs-number">1.5</span>},
+            AIState.ESCAPE: {<span class="hljs-string">"ghost"</span>: <span class="hljs-number">3.0</span>, <span class="hljs-string">"bean"</span>: <span class="hljs-number">0.8</span>, <span class="hljs-string">"bonus"</span>: <span class="hljs-number">1.0</span>},
+            AIState.BONUS: {<span class="hljs-string">"ghost"</span>: <span class="hljs-number">0.8</span>, <span class="hljs-string">"bean"</span>: <span class="hljs-number">1.5</span>, <span class="hljs-string">"bonus"</span>: <span class="hljs-number">2.0</span>},
+            AIState.GETOUT: {<span class="hljs-string">"ghost"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"bean"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"bonus"</span>: <span class="hljs-number">1</span>},
+        }
+
+        <span class="hljs-comment"># 特殊豆子价值</span>
+        self.bean_values = {
+            <span class="hljs-number">3</span>: <span class="hljs-number">4.0</span>,  <span class="hljs-comment"># BONUS_BEAN</span>
+            <span class="hljs-number">4</span>: <span class="hljs-number">3.0</span>,  <span class="hljs-comment"># SPEED_BEAN</span>
+            <span class="hljs-number">5</span>: <span class="hljs-number">2.5</span>,  <span class="hljs-comment"># MAGNET_BEAN</span>
+            <span class="hljs-number">6</span>: <span class="hljs-number">3.0</span>,  <span class="hljs-comment"># SHIELD_BEAN</span>
+            <span class="hljs-number">7</span>: <span class="hljs-number">2.5</span>,  <span class="hljs-comment"># DOUBLE_BEAN</span>
+        }
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count_remaining_bean</span><span class="hljs-params">(self, game_state: GameState)</span>:</span>
+        <span class="hljs-string">"""计算剩余豆子数量"""</span>
+        cnt = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(game_state.board_size):
+            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(game_state.board_size):
+                <span class="hljs-keyword">if</span> game_state.board[i][j] <span class="hljs-keyword">in</span> range(<span class="hljs-number">2</span>, <span class="hljs-number">8</span>):
+                    cnt += <span class="hljs-number">1</span>
+
+        <span class="hljs-keyword">return</span> cnt
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">point_to_vector_projection_distance</span><span class="hljs-params">(self, point, vector_start, vector_end)</span>:</span>
+        <span class="hljs-string">"""计算点到向量的投影距离"""</span>
+        vector = vector_end - vector_start
+        point_vector = point - vector_start
+        vector_length = np.linalg.norm(vector)
+
+        <span class="hljs-keyword">if</span> vector_length == <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">return</span> np.linalg.norm(point_vector)
+
+        vector_unit = vector / vector_length
+        projection_length = np.dot(point_vector, vector_unit)
+        projection_vector = vector_unit * projection_length
+        projection_point = vector_start + projection_vector
+        <span class="hljs-keyword">return</span> np.linalg.norm(point - projection_point)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">can_getout_before_ghosts</span><span class="hljs-params">(self, game_state: GameState)</span>:</span>
+        <span class="hljs-string">"""判断是否能在幽灵到达前到达传送门"""</span>
+        pacman_pos = np.array(game_state.pacman_pos)
+        portal_pos = np.array(game_state.portal_coord)
+        ghosts_pos = np.array(game_state.ghosts_pos)
+
+        dist_to_portal = np.linalg.norm(pacman_pos - portal_pos)
+        ghosts_projection_dist_to_catch = [
+            self.point_to_vector_projection_distance(ghost_pos, pacman_pos, portal_pos)
+            <span class="hljs-keyword">for</span> ghost_pos <span class="hljs-keyword">in</span> ghosts_pos
+        ]
+
+        <span class="hljs-keyword">return</span> dist_to_portal &lt; min(ghosts_projection_dist_to_catch) - <span class="hljs-number">1</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">manhattan_distance</span><span class="hljs-params">(self, pos1, pos2)</span>:</span>
+        <span class="hljs-string">"""计算曼哈顿距离"""</span>
+        <span class="hljs-keyword">return</span> abs(pos1[<span class="hljs-number">0</span>] - pos2[<span class="hljs-number">0</span>]) + abs(pos1[<span class="hljs-number">1</span>] - pos2[<span class="hljs-number">1</span>])
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_state</span><span class="hljs-params">(self, game_state: GameState)</span>:</span>
+        <span class="hljs-string">"""更新游戏状态"""</span>
+        pacman_pos = np.array(game_state.pacman_pos)
+        ghosts_pos = np.array(game_state.ghosts_pos)
+        <span class="hljs-comment"># 计算威胁程度</span>
+        ghost_distances = [
+            len(
+                self.a_star_search(
+                    np.array(pacman_pos), np.array(ghost_pos), game_state
+                )
+            )
+            <span class="hljs-keyword">for</span> ghost_pos <span class="hljs-keyword">in</span> game_state.ghosts_pos
+        ]
+        min_ghost_distance = min(ghost_distances)
+        <span class="hljs-comment"># 寻找特殊豆子</span>
+        special_bean = self.find_nearest_special_bean(game_state)
+        <span class="hljs-comment"># 检查是否有护盾状态</span>
+        has_shield = game_state.pacman_skill_status[Skill.SHIELD.value] &gt; <span class="hljs-number">0</span>
+        <span class="hljs-comment"># 状态机转换逻辑</span>
+        <span class="hljs-keyword">if</span> min_ghost_distance &lt; self.GHOST_DANGER_DISTANCE <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> has_shield:
+            <span class="hljs-comment"># 如果可以在幽灵到达前到达传送门，优先选择GETOUT</span>
+            <span class="hljs-keyword">if</span> (
+                game_state.level &lt; <span class="hljs-number">3</span>
+                <span class="hljs-keyword">and</span> self.can_getout_before_ghosts(game_state)
+                <span class="hljs-keyword">and</span> game_state.portal_available
+                <span class="hljs-keyword">and</span> self.count_remaining_bean(game_state) &lt; self.init_bean_num * <span class="hljs-number">0.5</span>
+            ):
+                self.current_state = AIState.GETOUT
+            <span class="hljs-keyword">else</span>:
+                self.current_state = AIState.ESCAPE
+        <span class="hljs-keyword">elif</span> (
+            game_state.level &lt; <span class="hljs-number">3</span>
+            <span class="hljs-keyword">and</span> game_state.portal_available
+            <span class="hljs-keyword">and</span> self.count_remaining_bean(game_state) &lt; self.init_bean_num * <span class="hljs-number">0.5</span>
+        ):
+            self.current_state = AIState.GETOUT
+        <span class="hljs-keyword">elif</span> special_bean <span class="hljs-keyword">and</span> special_bean[<span class="hljs-number">1</span>] &lt; <span class="hljs-number">8</span>:
+            self.current_state = AIState.BONUS
+        <span class="hljs-keyword">else</span>:
+            self.current_state = AIState.COLLECT
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find_nearest_special_bean</span><span class="hljs-params">(self, game_state)</span>:</span>
+        <span class="hljs-string">"""寻找最近的特殊豆子"""</span>
+        pacman_pos = np.array(game_state.pacman_pos)
+        special_beans = []
+
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(game_state.board_size):
+            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(game_state.board_size):
+                bean_type = game_state.board[i][j]
+                <span class="hljs-keyword">if</span> bean_type &gt;= <span class="hljs-number">3</span> <span class="hljs-keyword">and</span> bean_type &lt;= <span class="hljs-number">7</span>:  <span class="hljs-comment"># 特殊豆子</span>
+                    pos = np.array([i, j])
+                    dist = np.linalg.norm(pacman_pos - pos)
+                    value = self.bean_values[bean_type]
+                    score = value / (dist + <span class="hljs-number">1</span>)  <span class="hljs-comment"># 考虑距离和价值的综合评分</span>
+                    special_beans.append((pos, dist, score))
+
+        <span class="hljs-keyword">if</span> special_beans:
+            <span class="hljs-comment"># 按综合评分排序</span>
+            best_bean = max(special_beans, key=<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">2</span>])
+            <span class="hljs-keyword">return</span> (best_bean[<span class="hljs-number">0</span>], best_bean[<span class="hljs-number">1</span>])
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">a_star_search</span><span class="hljs-params">(self, start: np.ndarray, goal: np.ndarray, game_state: GameState)</span>:</span>
+        <span class="hljs-string">"""A*搜索路径"""</span>
+        open_set = set()
+        open_set.add(tuple(start))
+        came_from = {}
+        g_score = {tuple(start): <span class="hljs-number">0</span>}
+        f_score = {tuple(start): self.manhattan_distance(start, goal)}
+
+        <span class="hljs-keyword">while</span> open_set:
+            current = min(open_set, key=<span class="hljs-keyword">lambda</span> x: f_score.get(x, float(<span class="hljs-string">"inf"</span>)))
+            <span class="hljs-keyword">if</span> current == tuple(goal):
+                path = []
+                <span class="hljs-keyword">while</span> current <span class="hljs-keyword">in</span> came_from:
+                    path.append(current)
+                    current = came_from[current]
+                path.reverse()
+                <span class="hljs-keyword">return</span> path
+
+            open_set.remove(current)
+            <span class="hljs-keyword">for</span> direction, _ <span class="hljs-keyword">in</span> self.get_valid_moves(list(current), game_state):
+                neighbor = tuple(direction)
+                tentative_g_score = g_score[current] + <span class="hljs-number">1</span>
+                <span class="hljs-keyword">if</span> tentative_g_score &lt; g_score.get(neighbor, float(<span class="hljs-string">"inf"</span>)):
+                    came_from[neighbor] = current
+                    g_score[neighbor] = tentative_g_score
+                    f_score[neighbor] = tentative_g_score + self.manhattan_distance(
+                        neighbor, goal
+                    )
+                    <span class="hljs-keyword">if</span> neighbor <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> open_set:
+                        open_set.add(neighbor)
+
+        <span class="hljs-keyword">return</span> []
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">evaluate_position</span><span class="hljs-params">(self, pos, game_state)</span>:</span>
+        <span class="hljs-string">"""评估位置的价值"""</span>
+        pacman_pos = np.array(game_state.pacman_pos)
+        weights = self.weights[self.current_state]
+        ghost_distances = [
+            len(self.a_star_search(pos, np.array(ghost_pos), game_state))
+            <span class="hljs-keyword">for</span> ghost_pos <span class="hljs-keyword">in</span> game_state.ghosts_pos
+        ]
+        min_ghost_distance = min(ghost_distances)
+        ghost_score = (<span class="hljs-number">-4</span>) * weights[<span class="hljs-string">"ghost"</span>] / (min_ghost_distance + <span class="hljs-number">1</span>)
+
+        <span class="hljs-comment"># 计算周围豆子的价值</span>
+        bean_value = <span class="hljs-number">0</span>
+        scan_range = <span class="hljs-number">5</span>
+        <span class="hljs-keyword">for</span> dx <span class="hljs-keyword">in</span> range(-scan_range, scan_range + <span class="hljs-number">1</span>):
+            <span class="hljs-keyword">for</span> dy <span class="hljs-keyword">in</span> range(-scan_range, scan_range + <span class="hljs-number">1</span>):
+                new_x, new_y = int(pos[<span class="hljs-number">0</span>] + dx), int(pos[<span class="hljs-number">1</span>] + dy)
+                <span class="hljs-keyword">if</span> (
+                    <span class="hljs-number">0</span> &lt;= new_x &lt; game_state.board_size
+                    <span class="hljs-keyword">and</span> <span class="hljs-number">0</span> &lt;= new_y &lt; game_state.board_size
+                ):
+                    bean_type = game_state.board[new_x][new_y]
+                    <span class="hljs-keyword">if</span> bean_type <span class="hljs-keyword">in</span> BEANS_ITERATOR:  <span class="hljs-comment"># 有豆子</span>
+                        distance = abs(dx) + abs(dy)
+                        <span class="hljs-keyword">if</span> bean_type <span class="hljs-keyword">in</span> SPECIAL_BEANS_ITERATOR:  <span class="hljs-comment"># 特殊豆子</span>
+                            bean_value += self.bean_values[bean_type] / (distance + <span class="hljs-number">1</span>)
+                        <span class="hljs-keyword">elif</span> bean_type == Space.REGULAR_BEAN.value:  <span class="hljs-comment"># 普通豆子</span>
+                            bean_value += <span class="hljs-number">1</span> / (distance + <span class="hljs-number">1</span>)
+
+        <span class="hljs-comment"># 避免重复访问</span>
+        pos_tuple = tuple(pos)
+        repeat_penalty = <span class="hljs-number">0</span>
+        visit_count = self.history.count(pos_tuple)
+        repeat_penalty = <span class="hljs-number">-8</span> * visit_count
+        final_score = ghost_score + bean_value * weights[<span class="hljs-string">"bean"</span>] + repeat_penalty
+
+        <span class="hljs-comment"># 如果是逃离模式，确保远离幽灵</span>
+        <span class="hljs-keyword">if</span> self.current_state == AIState.ESCAPE:
+            <span class="hljs-keyword">if</span> min_ghost_distance &lt; self.GHOST_DANGER_DISTANCE:
+                final_score -= (self.GHOST_DANGER_DISTANCE - min_ghost_distance) * <span class="hljs-number">10</span>
+
+        <span class="hljs-comment"># 如果是GETOUT模式，确保尽快到达传送门</span>
+        <span class="hljs-keyword">if</span> self.current_state == AIState.GETOUT:
+            portal_pos = np.array(game_state.portal_coord)
+            dist_to_portal = np.linalg.norm(pos - portal_pos)
+            final_score += <span class="hljs-number">30</span> / (dist_to_portal + <span class="hljs-number">1</span>)
+        <span class="hljs-keyword">return</span> final_score
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_valid_moves</span><span class="hljs-params">(self, pos, game_state)</span>:</span>
+        <span class="hljs-string">"""获取有效的移动方向"""</span>
+        moves = []
+        directions = [
+            (np.array(list(Update.UP.value)), Direction.UP.value),  <span class="hljs-comment"># UP</span>
+            (np.array(list(Update.LEFT.value)), Direction.LEFT.value),  <span class="hljs-comment"># LEFT</span>
+            (np.array(list(Update.DOWN.value)), Direction.DOWN.value),  <span class="hljs-comment"># DOWN</span>
+            (np.array(list(Update.RIGHT.value)), Direction.RIGHT.value),  <span class="hljs-comment"># RIGHT</span>
+        ]
+        <span class="hljs-keyword">for</span> direction, move_num <span class="hljs-keyword">in</span> directions:
+            new_pos = pos + direction
+            <span class="hljs-keyword">if</span> self.is_valid_position(new_pos, game_state):
+                moves.append((new_pos, move_num))
+        <span class="hljs-keyword">return</span> moves
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_valid_position</span><span class="hljs-params">(self, pos, game_state)</span>:</span>
+        <span class="hljs-string">"""检查位置是否有效"""</span>
+        x, y = int(pos[<span class="hljs-number">0</span>]), int(pos[<span class="hljs-number">1</span>])
+        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= x &lt; game_state.board_size <span class="hljs-keyword">and</span> <span class="hljs-number">0</span> &lt;= y &lt; game_state.board_size:
+            <span class="hljs-keyword">if</span> self.current_state != AIState.GETOUT:
+                <span class="hljs-keyword">if</span> game_state.board[x][y] == Space.PORTAL.value:
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+            <span class="hljs-keyword">if</span> game_state.board[x][y] != Space.WALL.value:
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">choose_move</span><span class="hljs-params">(self, game_state: GameState)</span>:</span>
+        <span class="hljs-string">"""选择移动方向"""</span>
+        <span class="hljs-comment"># 初始化</span>
+        <span class="hljs-keyword">if</span> game_state.round == <span class="hljs-number">1</span>:
+            self.init_bean_num = self.count_remaining_bean(game_state)
+        self.board_size = game_state.board_size
+        self.update_state(game_state)
+        pacman_pos = np.array(game_state.pacman_pos)
+        valid_moves = self.get_valid_moves(pacman_pos, game_state)
+        <span class="hljs-comment"># 评估每个可能的移动</span>
+        move_scores = []
+        <span class="hljs-keyword">for</span> new_pos, move_num <span class="hljs-keyword">in</span> valid_moves:
+            score = self.evaluate_position(new_pos, game_state)
+            move_scores.append((score, move_num))
+        <span class="hljs-comment"># 选择最佳移动</span>
+        <span class="hljs-keyword">if</span> move_scores:
+            best_score, best_move = max(move_scores, key=<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-number">0</span>])
+            <span class="hljs-comment"># 更新历史记录</span>
+            self.history.append(tuple(pacman_pos))
+            <span class="hljs-keyword">return</span> [best_move]
+        <span class="hljs-keyword">return</span> [Direction.STAY.value]  <span class="hljs-comment"># 默认停留</span>
+
+ai_func = PacmanAI().choose_move
+__all__ = [<span class="hljs-string">"ai_func"</span>]
+</div></code></pre>
+<p>注意：按照要求，我们的choose_move函数返回一个长度为1的列表，并自定义导出名称为ai_func。</p>
+<h3 id="%E5%B9%BD%E7%81%B5">幽灵</h3>
+<p>因为幽灵控制者能够控制多个幽灵，所以可以对不同的幽灵构造不同的策略，达到围堵吃豆人的目的。</p>
+<p>幽灵AI的主要策略包括:</p>
+<ol>
+<li>基本功能</li>
+</ol>
+<ul>
+<li>使用曼哈顿距离计算位置间距离</li>
+<li>获取有效移动方向</li>
+<li>A*寻路算法实现路径规划</li>
+<li>记录历史位置避免重复移动</li>
+</ul>
+<ol start="2">
+<li>三个幽灵的不同策略</li>
+</ol>
+<p>幽灵1(Ghost 0):</p>
+<ul>
+<li>直接追击模式</li>
+<li>使用A*算法寻找最短路径追击吃豆人</li>
+<li>作为主要追击者</li>
+</ul>
+<p>幽灵2(Ghost 1):</p>
+<ul>
+<li>预测截击模式</li>
+<li>预测吃豆人移动方向</li>
+<li>提前移动到预测位置拦截</li>
+<li>与幽灵1重合时随机移动</li>
+</ul>
+<p>幽灵3(Ghost 2):</p>
+<ul>
+<li>协同包围模式</li>
+<li>参考幽灵1位置进行包围</li>
+<li>尝试切断吃豆人逃跑路线</li>
+<li>与其他幽灵重合时随机移动</li>
+</ul>
+<ol start="3">
+<li>移动决策</li>
+</ol>
+<ul>
+<li>距离吃豆人很近(&lt;=3)时直接追击</li>
+<li>距离较远时根据不同幽灵策略行动</li>
+<li>使用历史记录避免重复移动</li>
+<li>在无法到达目标时选择最近路径</li>
+</ul>
+<ol start="4">
+<li>关键实现</li>
+</ol>
+<ul>
+<li>使用A*算法进行路径规划</li>
+<li>计算曼哈顿距离评估位置</li>
+<li>记录历史位置防止重复</li>
+<li>不同幽灵协同配合</li>
+</ul>
+<p>通过以上策略,三个幽灵可以有效配合围堵吃豆人。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">from</span> core.gamedata <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">import</span> random
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse</span><span class="hljs-params">(x: tuple)</span>:</span>
+    <span class="hljs-keyword">if</span> x == (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>):
+        <span class="hljs-keyword">return</span> Direction.STAY.value
+    <span class="hljs-keyword">if</span> x == (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>):
+        <span class="hljs-keyword">return</span> Direction.UP.value
+    <span class="hljs-keyword">if</span> x == (<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>):
+        <span class="hljs-keyword">return</span> Direction.DOWN.value
+    <span class="hljs-keyword">if</span> x == (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>):
+        <span class="hljs-keyword">return</span> Direction.RIGHT.value
+    <span class="hljs-keyword">if</span> x == (<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>):
+        <span class="hljs-keyword">return</span> Direction.LEFT.value
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GhostAI</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span>
+        self.position_history = {<span class="hljs-number">0</span>: [], <span class="hljs-number">1</span>: [], <span class="hljs-number">2</span>: []}
+        self.history_length = <span class="hljs-number">5</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">manhattan_distance</span><span class="hljs-params">(self, pos1, pos2)</span>:</span>
+        <span class="hljs-keyword">return</span> abs(pos1[<span class="hljs-number">0</span>] - pos2[<span class="hljs-number">0</span>]) + abs(pos1[<span class="hljs-number">1</span>] - pos2[<span class="hljs-number">1</span>])
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_valid_moves</span><span class="hljs-params">(self, pos, game_state)</span>:</span>
+        valid_moves = []
+        directions = [
+            ([<span class="hljs-number">1</span>, <span class="hljs-number">0</span>], <span class="hljs-number">1</span>),  <span class="hljs-comment"># UP</span>
+            ([<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>], <span class="hljs-number">3</span>),  <span class="hljs-comment"># DOWN</span>
+            ([<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>], <span class="hljs-number">2</span>),  <span class="hljs-comment"># LEFT</span>
+            ([<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], <span class="hljs-number">4</span>),  <span class="hljs-comment"># RIGHT</span>
+        ]
+
+        <span class="hljs-keyword">for</span> direction, move_value <span class="hljs-keyword">in</span> directions:
+            new_pos = [pos[<span class="hljs-number">0</span>] + direction[<span class="hljs-number">0</span>], pos[<span class="hljs-number">1</span>] + direction[<span class="hljs-number">1</span>]]
+            <span class="hljs-keyword">if</span> (
+                <span class="hljs-number">0</span> &lt;= new_pos[<span class="hljs-number">0</span>] &lt; game_state.board_size
+                <span class="hljs-keyword">and</span> <span class="hljs-number">0</span> &lt;= new_pos[<span class="hljs-number">1</span>] &lt; game_state.board_size
+                <span class="hljs-keyword">and</span> game_state.board[new_pos[<span class="hljs-number">0</span>]][new_pos[<span class="hljs-number">1</span>]] != <span class="hljs-number">0</span>
+            ):
+                valid_moves.append((new_pos, move_value))
+        <span class="hljs-keyword">return</span> valid_moves
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">a_star_search</span><span class="hljs-params">(self, start: np.ndarray, goal: np.ndarray, game_state: GameState)</span>:</span>
+        open_set = set()
+        open_set.add(tuple(start))
+        came_from = {}
+
+        g_score = {tuple(start): <span class="hljs-number">0</span>}
+        f_score = {tuple(start): self.manhattan_distance(start, goal)}
+
+        <span class="hljs-keyword">while</span> open_set:
+            current = min(open_set, key=<span class="hljs-keyword">lambda</span> x: f_score.get(x, float(<span class="hljs-string">"inf"</span>)))
+            <span class="hljs-keyword">if</span> current == tuple(goal):
+                path = []
+                <span class="hljs-keyword">while</span> current <span class="hljs-keyword">in</span> came_from:
+                    path.append(current)
+                    current = came_from[current]
+                path.reverse()
+                <span class="hljs-keyword">return</span> path
+
+            open_set.remove(current)
+            <span class="hljs-keyword">for</span> direction, _ <span class="hljs-keyword">in</span> self.get_valid_moves(list(current), game_state):
+                neighbor = tuple(direction)
+                tentative_g_score = g_score[current] + <span class="hljs-number">1</span>
+
+                <span class="hljs-keyword">if</span> tentative_g_score &lt; g_score.get(neighbor, float(<span class="hljs-string">"inf"</span>)):
+                    came_from[neighbor] = current
+                    g_score[neighbor] = tentative_g_score
+                    f_score[neighbor] = tentative_g_score + self.manhattan_distance(
+                        neighbor, goal
+                    )
+                    <span class="hljs-keyword">if</span> neighbor <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> open_set:
+                        open_set.add(neighbor)
+
+        <span class="hljs-keyword">return</span> []
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calculate_stagnation_penalty</span><span class="hljs-params">(self, new_pos, ghost_id)</span>:</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.position_history[ghost_id]:
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>
+        repeat_count = sum(
+            <span class="hljs-number">1</span>
+            <span class="hljs-keyword">for</span> pos <span class="hljs-keyword">in</span> self.position_history[ghost_id]
+            <span class="hljs-keyword">if</span> pos[<span class="hljs-number">0</span>] == new_pos[<span class="hljs-number">0</span>] <span class="hljs-keyword">and</span> pos[<span class="hljs-number">1</span>] == new_pos[<span class="hljs-number">1</span>]
+        )
+        <span class="hljs-keyword">return</span> repeat_count * <span class="hljs-number">2</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_history</span><span class="hljs-params">(self, ghost_id, new_pos)</span>:</span>
+        self.position_history[ghost_id].append(new_pos)
+        <span class="hljs-keyword">if</span> len(self.position_history[ghost_id]) &gt; self.history_length:
+            self.position_history[ghost_id].pop(<span class="hljs-number">0</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">choose_moves</span><span class="hljs-params">(self, game_state: GameState)</span>:</span>
+        moves = []
+        pacman_pos = game_state.pacman_pos
+
+        <span class="hljs-keyword">for</span> ghost_id <span class="hljs-keyword">in</span> range(<span class="hljs-number">3</span>):
+            current_pos = game_state.ghosts_pos[ghost_id]
+            valid_moves = self.get_valid_moves(current_pos, game_state)
+
+            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> valid_moves:
+                moves.append(Direction.STAY.value)
+                <span class="hljs-keyword">continue</span>
+
+            <span class="hljs-comment"># 计算到吃豆人的距离</span>
+            a_star_path = self.a_star_search(current_pos, pacman_pos, game_state)
+            distance_to_pacman = len(a_star_path) <span class="hljs-keyword">if</span> a_star_path <span class="hljs-keyword">else</span> float(<span class="hljs-string">"inf"</span>)
+
+            <span class="hljs-comment"># 如果距离很近（比如小于3），直接追击</span>
+            <span class="hljs-keyword">if</span> distance_to_pacman &lt;= <span class="hljs-number">3</span>:
+                best_move = (
+                    a_star_path[<span class="hljs-number">0</span>],
+                    parse(
+                        (
+                            a_star_path[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] - current_pos[<span class="hljs-number">0</span>],
+                            a_star_path[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] - current_pos[<span class="hljs-number">1</span>],
+                        )
+                    ),
+                )
+            <span class="hljs-keyword">else</span>:
+                <span class="hljs-comment"># 距离较远时使用更复杂的策略</span>
+                target_pos = pacman_pos
+                <span class="hljs-comment"># 不同幽灵的策略</span>
+                <span class="hljs-keyword">if</span> ghost_id == <span class="hljs-number">0</span>:
+                    <span class="hljs-comment"># 通过A*寻路算法直接追击</span>
+                    <span class="hljs-keyword">pass</span>
+                <span class="hljs-keyword">elif</span> ghost_id == <span class="hljs-number">1</span>:
+                    <span class="hljs-keyword">if</span> (
+                        current_pos[<span class="hljs-number">0</span>] == game_state.ghosts_pos[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]
+                        <span class="hljs-keyword">and</span> current_pos[<span class="hljs-number">1</span>] == game_state.ghosts_pos[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]
+                    ):
+                        <span class="hljs-comment"># 第二个幽灵与第一个幽灵重合时，随机移动</span>
+                        best_move = random.choice(valid_moves)
+                        self.update_history(ghost_id, best_move[<span class="hljs-number">0</span>])
+                        moves.append(best_move[<span class="hljs-number">1</span>])
+                        <span class="hljs-keyword">continue</span>
+                    <span class="hljs-comment"># 预测吃豆人移动方向</span>
+                    dx = pacman_pos[<span class="hljs-number">0</span>] - current_pos[<span class="hljs-number">0</span>]
+                    dy = pacman_pos[<span class="hljs-number">1</span>] - current_pos[<span class="hljs-number">1</span>]
+                    predicted_x = pacman_pos[<span class="hljs-number">0</span>] + (<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> dx &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">-1</span> <span class="hljs-keyword">if</span> dx &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>)
+                    predicted_y = pacman_pos[<span class="hljs-number">1</span>] + (<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> dy &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">-1</span> <span class="hljs-keyword">if</span> dy &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>)
+                    <span class="hljs-keyword">if</span> (
+                        <span class="hljs-number">0</span> &lt;= predicted_x &lt; game_state.board_size
+                        <span class="hljs-keyword">and</span> <span class="hljs-number">0</span> &lt;= predicted_y &lt; game_state.board_size
+                        <span class="hljs-keyword">and</span> game_state.board[predicted_x][predicted_y] != <span class="hljs-number">0</span>
+                    ):
+                        target_pos = np.array([predicted_x, predicted_y])
+                <span class="hljs-keyword">else</span>:
+                    <span class="hljs-keyword">if</span> (
+                        current_pos[<span class="hljs-number">0</span>] == game_state.ghosts_pos[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]
+                        <span class="hljs-keyword">and</span> current_pos[<span class="hljs-number">1</span>] == game_state.ghosts_pos[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]
+                    ) <span class="hljs-keyword">or</span> (
+                        current_pos[<span class="hljs-number">0</span>] == game_state.ghosts_pos[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]
+                        <span class="hljs-keyword">and</span> current_pos[<span class="hljs-number">1</span>] == game_state.ghosts_pos[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]
+                    ):
+
+                        <span class="hljs-comment"># 第三个幽灵与第一个或第二个幽灵重合时，随机移动</span>
+                        best_move = random.choice(valid_moves)
+                        self.update_history(ghost_id, best_move[<span class="hljs-number">0</span>])
+                        moves.append(best_move[<span class="hljs-number">1</span>])
+                        <span class="hljs-keyword">continue</span>
+                    <span class="hljs-comment"># 尝试切断路线</span>
+                    other_ghost = game_state.ghosts_pos[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 使用第一个幽灵作为参考</span>
+                    dx = pacman_pos[<span class="hljs-number">0</span>] - other_ghost[<span class="hljs-number">0</span>]
+                    dy = pacman_pos[<span class="hljs-number">1</span>] - other_ghost[<span class="hljs-number">1</span>]
+                    intercept_x = pacman_pos[<span class="hljs-number">0</span>] + (<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> dx &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">-1</span> <span class="hljs-keyword">if</span> dx &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>)
+                    intercept_y = pacman_pos[<span class="hljs-number">1</span>] + (<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> dy &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">-1</span> <span class="hljs-keyword">if</span> dy &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>)
+                    intercept_x = max(<span class="hljs-number">0</span>, min(intercept_x, game_state.board_size - <span class="hljs-number">1</span>))
+                    intercept_y = max(<span class="hljs-number">0</span>, min(intercept_y, game_state.board_size - <span class="hljs-number">1</span>))
+                    <span class="hljs-keyword">if</span> game_state.board[intercept_x][intercept_y] != <span class="hljs-number">0</span>:
+                        target_pos = np.array([intercept_x, intercept_y])
+
+                path = self.a_star_search(current_pos, target_pos, game_state)
+
+                <span class="hljs-keyword">if</span> path:
+                    best_move = (
+                        path[<span class="hljs-number">0</span>],
+                        parse(
+                            (path[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] - current_pos[<span class="hljs-number">0</span>], path[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] - current_pos[<span class="hljs-number">1</span>])
+                        ),
+                    )
+                <span class="hljs-keyword">else</span>:
+                    best_move = min(
+                        valid_moves,
+                        key=<span class="hljs-keyword">lambda</span> x: self.manhattan_distance(x[<span class="hljs-number">0</span>], pacman_pos),
+                    )
+
+            self.update_history(ghost_id, best_move[<span class="hljs-number">0</span>])
+            moves.append(best_move[<span class="hljs-number">1</span>])
+
+        <span class="hljs-keyword">return</span> moves
+
+
+ai_func = GhostAI().choose_moves
+__all__ = [<span class="hljs-string">"ai_func"</span>]
+</div></code></pre>
+<h2 id="stage3%E7%82%BC%E4%B8%B9">stage3：炼丹</h2>
+<h2 id="stage4%E5%8F%AF%E8%83%BD%E7%9A%84%E6%94%B9%E8%BF%9B">stage4：可能的改进</h2>
+
+</body>
+</html>
