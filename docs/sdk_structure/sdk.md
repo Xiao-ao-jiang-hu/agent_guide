@@ -53,3 +53,5 @@ if __name__ == "__main__":
     controller.init()
     controller.start_game(ai)
 ```
+
+## OpenAI GYM Package
