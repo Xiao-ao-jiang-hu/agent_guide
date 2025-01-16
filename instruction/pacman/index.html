@@ -79,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#rollman" class="md-skip">
           Skip to content
         </a>
       
@@ -285,7 +285,7 @@
         
   
   <span class="md-ellipsis">
-    Pacman游戏简介
+    Rollman游戏简介
   </span>
   
 
@@ -306,7 +306,7 @@
         
   
   <span class="md-ellipsis">
-    Pacman游戏开发者文档
+    Rollman通信文档
   </span>
   
 
@@ -654,16 +654,16 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#rollman_1" class="md-nav__link">
     <span class="md-ellipsis">
-      吃豆人
+      Rollman
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       幽灵
     </span>
@@ -687,16 +687,16 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#rollman_2" class="md-nav__link">
     <span class="md-ellipsis">
-      吃豆人
+      Rollman
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       幽灵
     </span>
@@ -780,16 +780,16 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#rollman_1" class="md-nav__link">
     <span class="md-ellipsis">
-      吃豆人
+      Rollman
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       幽灵
     </span>
@@ -813,16 +813,16 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#rollman_2" class="md-nav__link">
     <span class="md-ellipsis">
-      吃豆人
+      Rollman
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       幽灵
     </span>
@@ -868,10 +868,10 @@
                   
 
 
-<h1 id="_1">吃豆人开发指南</h1>
-<p>本文档为吃豆人的开发指南。本文档基于热身赛sdk进行开发，sdk的使用说明可以参考引导文档sdk部分的对应文档。</p>
+<h1 id="rollman">Rollman开发指南</h1>
+<p>本文档为Rollman的开发指南。本文档基于热身赛sdk进行开发，sdk的使用说明可以参考引导文档sdk部分的对应文档。</p>
 <h2 id="stage1-ai">stage1: 实现一个能运行的ai</h2>
-<h3 id="_2">吃豆人</h3>
+<h3 id="rollman_1">Rollman</h3>
 <p>我们首先实现一个能够在平台上运行的agent。</p>
 <p>根据sdk的文档，我们需要实现一个ai函数，该函数接收一个GameState类型的对象，返回一个<b>长度为1</b>的数组，数组元素为<code>[0, 4]</code>之间的整数。我们可以使用随机采样实现该函数：
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ai.py</span>
@@ -886,7 +886,7 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">action</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">return</span> <span class="p">[</span><span class="n">action</span><span class="p">]</span>
 </code></pre></div></p>
-<h3 id="_3">幽灵</h3>
+<h3 id="_1">幽灵</h3>
 <p>我们首先实现一个能够在平台上运行的agent。</p>
 <p>根据sdk的文档，我们需要实现一个ai函数，该函数接收一个GameState类型的对象，返回一个<b>长度为3</b>的数组，数组元素为<code>[0, 4]</code>之间的整数。我们可以使用随机采样实现该函数：
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># ai.py</span>
@@ -904,8 +904,8 @@
 此时我们已经实现了一个能运行的ai，但是很明显随机移动的ai不足以取得好的效果，下面我们实现一个有策略的ai。</p>
 <h2 id="stage2ai">stage2：实现一个有策略的ai</h2>
 <p>我们已经在gamedata.py文件中定义了很多封装与抽象，你可以直接使用来简化你的代码逻辑。</p>
-<h3 id="_4">吃豆人</h3>
-<p>我们可以实现一个基于状态机的AI来控制吃豆人。这个AI会根据当前游戏局面，动态切换不同的行为状态，并使用评分函数来选择最优的移动方向。</p>
+<h3 id="rollman_2">Rollman</h3>
+<p>我们可以实现一个基于状态机的AI来控制卷王。这个AI会根据当前游戏局面，动态切换不同的行为状态，并使用评分函数来选择最优的移动方向。</p>
 <p>主要的状态包括:</p>
 <ul>
 <li>COLLECT: 收集普通豆子模式，在安全时主动寻找并吃掉普通豆子</li>
@@ -1223,8 +1223,8 @@
 <a id="__codelineno-2-277" name="__codelineno-2-277" href="#__codelineno-2-277"></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ai_func&quot;</span><span class="p">]</span>
 </code></pre></div>
 注意：按照要求，我们的choose_move函数返回一个长度为1的列表，并自定义导出名称为ai_func。</p>
-<h3 id="_5">幽灵</h3>
-<p>因为幽灵控制者能够控制多个幽灵，所以可以对不同的幽灵构造不同的策略，达到围堵吃豆人的目的。</p>
+<h3 id="_2">幽灵</h3>
+<p>因为幽灵控制者能够控制多个幽灵，所以可以对不同的幽灵构造不同的策略，达到围堵卷王的目的。</p>
 <p>幽灵AI的主要策略包括:</p>
 <ol>
 <li>基本功能</li>
@@ -1240,21 +1240,21 @@
 </ol>
 <p>幽灵1(Ghost 0):
 - 直接追击模式
-- 使用A*算法寻找最短路径追击吃豆人
+- 使用A*算法寻找最短路径追击卷王
 - 作为主要追击者</p>
 <p>幽灵2(Ghost 1): 
 - 预测截击模式
-- 预测吃豆人移动方向
+- 预测卷王移动方向
 - 提前移动到预测位置拦截
 - 与幽灵1重合时随机移动</p>
 <p>幽灵3(Ghost 2):
 - 协同包围模式 
 - 参考幽灵1位置进行包围
-- 尝试切断吃豆人逃跑路线
+- 尝试切断卷王逃跑路线
 - 与其他幽灵重合时随机移动</p>
 <ol>
 <li>移动决策</li>
-<li>距离吃豆人很近(&lt;=3)时直接追击</li>
+<li>距离卷王很近(&lt;=3)时直接追击</li>
 <li>距离较远时根据不同幽灵策略行动</li>
 <li>使用历史记录避免重复移动</li>
 <li>
@@ -1268,7 +1268,7 @@
 <li>记录历史位置防止重复</li>
 <li>不同幽灵协同配合</li>
 </ol>
-<p>通过以上策略,三个幽灵可以有效配合围堵吃豆人。</p>
+<p>通过以上策略,三个幽灵可以有效配合围堵卷王。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">core.gamedata</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1374,7 +1374,7 @@
 <a id="__codelineno-3-103" name="__codelineno-3-103" href="#__codelineno-3-103"></a>                <span class="n">moves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Direction</span><span class="o">.</span><span class="n">STAY</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 <a id="__codelineno-3-104" name="__codelineno-3-104" href="#__codelineno-3-104"></a>                <span class="k">continue</span>
 <a id="__codelineno-3-105" name="__codelineno-3-105" href="#__codelineno-3-105"></a>
-<a id="__codelineno-3-106" name="__codelineno-3-106" href="#__codelineno-3-106"></a>            <span class="c1"># 计算到吃豆人的距离</span>
+<a id="__codelineno-3-106" name="__codelineno-3-106" href="#__codelineno-3-106"></a>            <span class="c1"># 计算到卷王的距离</span>
 <a id="__codelineno-3-107" name="__codelineno-3-107" href="#__codelineno-3-107"></a>            <span class="n">a_star_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">a_star_search</span><span class="p">(</span><span class="n">current_pos</span><span class="p">,</span> <span class="n">pacman_pos</span><span class="p">,</span> <span class="n">game_state</span><span class="p">)</span>
 <a id="__codelineno-3-108" name="__codelineno-3-108" href="#__codelineno-3-108"></a>            <span class="n">distance_to_pacman</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_star_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">a_star_path</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-109" name="__codelineno-3-109" href="#__codelineno-3-109"></a>
@@ -1406,7 +1406,7 @@
 <a id="__codelineno-3-135" name="__codelineno-3-135" href="#__codelineno-3-135"></a>                        <span class="bp">self</span><span class="o">.</span><span class="n">update_history</span><span class="p">(</span><span class="n">ghost_id</span><span class="p">,</span> <span class="n">best_move</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <a id="__codelineno-3-136" name="__codelineno-3-136" href="#__codelineno-3-136"></a>                        <span class="n">moves</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">best_move</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <a id="__codelineno-3-137" name="__codelineno-3-137" href="#__codelineno-3-137"></a>                        <span class="k">continue</span>
-<a id="__codelineno-3-138" name="__codelineno-3-138" href="#__codelineno-3-138"></a>                    <span class="c1"># 预测吃豆人移动方向</span>
+<a id="__codelineno-3-138" name="__codelineno-3-138" href="#__codelineno-3-138"></a>                    <span class="c1"># 预测卷王移动方向</span>
 <a id="__codelineno-3-139" name="__codelineno-3-139" href="#__codelineno-3-139"></a>                    <span class="n">dx</span> <span class="o">=</span> <span class="n">pacman_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">current_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <a id="__codelineno-3-140" name="__codelineno-3-140" href="#__codelineno-3-140"></a>                    <span class="n">dy</span> <span class="o">=</span> <span class="n">pacman_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">current_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <a id="__codelineno-3-141" name="__codelineno-3-141" href="#__codelineno-3-141"></a>                    <span class="n">predicted_x</span> <span class="o">=</span> <span class="n">pacman_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">dx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">dx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
@@ -1469,7 +1469,7 @@
 <h2 id="stage3">stage3：炼丹</h2>
 <p>stage2已经是一个较优解，但距离最优解仍有距离。首先，对于状态空间的遍历不够彻底。其次，固定在博弈中也很难事最优解。我们希望使用机器学习方法对最优策略进行求解。</p>
 <p>我们以DQN为例介绍使用Pacman SDK中的Gym Environment进行深度强化学习训练的流程。</p>
-<p>首先我们设计对局面的表示。此处的实现为将棋盘、幽灵位置、吃豆人位置和出口位置构成的四通道二位张量和将游戏阶段、回合数、棋盘大小和出口是否激活重复十次构成的一维向量作为一个局面的表示。该表示可以通过<code>state_dict_to_tensor</code>方法由step函数返回的state获得。</p>
+<p>首先我们设计对局面的表示。此处的实现为将棋盘、幽灵位置、卷王位置和出口位置构成的四通道二位张量和将游戏阶段、回合数、棋盘大小和出口是否激活重复十次构成的一维向量作为一个局面的表示。该表示可以通过<code>state_dict_to_tensor</code>方法由step函数返回的state获得。</p>
 <p>接着使用pytorch实现动作价值网络（此处仅展示Pacman动作价值网络的实现）：
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># model.py</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">PacmanNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
