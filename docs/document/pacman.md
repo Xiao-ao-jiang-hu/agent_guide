@@ -69,9 +69,9 @@ AI初始化限制运行时间2s，操作限制运行时间1s，空间512MB，超
 
 ## 五、AI SDK
 
-吃豆人SDK仓库：[https://github.com/PacMan-Logic/PacmanSDK-python](https://github.com/PacMan-Logic/PacmanSDK-python)
+Rollman SDK仓库：[https://github.com/PacMan-Logic/PacmanSDK-python](https://github.com/PacMan-Logic/PacmanSDK-python)
 
-幽灵SDK仓库：[https://github.com/PacMan-Logic/GhostsSDK-python](https://github.com/PacMan-Logic/GhostsSDK-python)
+幽灵 SDK仓库：[https://github.com/PacMan-Logic/GhostsSDK-python](https://github.com/PacMan-Logic/GhostsSDK-python)
 
 逻辑仓库：[https://github.com/PacMan-Logic/PacmanLogic](https://github.com/PacMan-Logic/PacmanLogic)
 
@@ -93,4 +93,4 @@ AI初始化限制运行时间2s，操作限制运行时间1s，空间512MB，超
 |向右运动|4|
 
 ### 初始化信息及回放文件格式
-见通信文档
+见[通信文档](https://agent-guide.net9.org/document/pacman_api/)

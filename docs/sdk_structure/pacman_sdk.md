@@ -2,7 +2,7 @@
 
 本文档是Rollman和幽灵的 SDK 使用说明
 
-吃豆人 SDK 仓库：[https://github.com/PacMan-Logic/PacmanSDK-python](https://github.com/PacMan-Logic/PacmanSDK-python)
+Rollman SDK 仓库：[https://github.com/PacMan-Logic/PacmanSDK-python](https://github.com/PacMan-Logic/PacmanSDK-python)
 
 幽灵 SDK 仓库：[https://github.com/PacMan-Logic/GhostsSDK-python](https://github.com/PacMan-Logic/GhostsSDK-python)
 
@@ -17,15 +17,38 @@
 
 SDK 由 GYM 环境类、游戏控制器和 AI 函数组成。
 
+### 局面状态信息表示方法
+
+以字典类型表示当前局面的状态信息，具体格式为
+```py
+{
+    "level": self._level, # int 表示当前关卡
+    "round": self._round, # int 表示当前轮次
+    "board_size": self._size, # int 表示当前关卡棋盘大小
+    "board": self._board, # ndarray 表示当前关卡棋盘大小
+    "pacman_skill_status": np.array(self._pacman.get_skills_status()), # ndarray 表示当前拥有的技能
+    "pacman_coord": self._pacman.get_coord(), # ndarray 表示卷王的坐标
+    "ghosts_coord": [ghost.get_coord() for ghost in self._ghosts], # ndarray 表示幽灵的坐标
+    "score": [self._pacman_score, self._ghosts_score], # list 表示卷王和幽灵的分数
+    "beannumber": self._beannumber, # int 表示地图中一共有多少豆子
+    "portal_available": self._portal_available, # bool 表示传送门是否开启
+    "portal_coord": self._portal_coord, # ndarray 表示传送门坐标
+}
+```
+
 ### GYM 环境类（PacmanEnv）
 
 GYM 环境类（PacmanEnv）维护了游戏局面的全量信息供 AI 调用。该类提供如下接口：
 
 #### reset
 
+* Args: mode(string) 为"logic"或"local"
+
 * Returns: return_dict(dict)
 
-reset 函数在每关开始时由 judger 调用。玩家将进入一个新的地图，卷王和三个幽灵会随机生成在地图的四个角落。该函数会返回一个包含新地图信息的 JSON 字符串。随后，judger 会将这个 JSON 字符串编码并发送给 AI。
+reset 函数在每关开始时被调用。玩家将进入一个新的地图，卷王和三个幽灵会随机生成在地图的四个角落。该函数会返回一个表示当前局面状态信息的字典。
+
+在 mode="local" 时，第三关结束后将重置到第一关，便于模型的训练。
 
 #### ai_reset
 
@@ -39,13 +62,14 @@ reset 函数在每关开始时由 judger 调用。玩家将进入一个新的地
 
 * Returns: return_dict(dict)
 
-传入 mode="local"时可在本地终端生成地图，供选手调试使用。
+传入 mode="local" 时可在本地终端生成地图，供选手调试使用。
 
 #### step
 
 * Args: pacmanAction(int), ghostAction(List[int])
 
-* Returns: (level_change(bool), eat_all_beans(bool))(tuple)  level_change表示是否切换到下一关，eat_all_beans表示本关是否吃完全部的豆子
+* Returns: (return_dict(dict), pacman_reward(int), ghosts_reward(int), level_change(bool), eat_all_beans(bool))  
+分别为局面状态信息、卷王当前轮次的加分、幽灵当前轮次的加分、是否切换到下一关、本关是否吃完全部的豆子
 
 step 函数是环境更新的主函数，处理游戏逻辑，按照选手的输入更新游戏状态。
 
@@ -199,7 +223,7 @@ gamestate.pacman_score
 gamestate.ghosts_pos
 ```
 
-为`np.ndarray[np.ndarray[int]]`类型的值
+为`list[np.ndarray[int]]`类型的值
 
 长度为 3，表示三个幽灵的坐标
 
@@ -248,3 +272,9 @@ gamestate.space_info
     "ghost_action_space": spaces.MultiDiscrete(np.ones(3) * 5)
 }
 ```
+
+### 把GameState类的对象转化为局面状态信息字典
+```
+gamestate.gamestate_to_statedict()
+```
+返回`dict`类型的值，为局面状态信息字典
