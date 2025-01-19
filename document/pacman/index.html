@@ -450,6 +450,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      七、关于地图的生成
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -927,6 +936,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      七、关于地图的生成
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -987,7 +1005,7 @@
 <h2 id="_3">三、加分规则</h2>
 <h3 id="_4">卷王</h3>
 <p>如果卷王在没有被幽灵抓住的情况下，一命连续获得 100 分，则会获得额外的 50 分加分。</p>
-<p>如果卷王把本关地图中所有的豆子全吃完了，会获得 50 分的加分。</p>
+<p>如果卷王把本关地图中所有的金币全吃完了，会获得 50 分的加分。</p>
 <p>如果卷王被幽灵吃掉了一次，会被减掉 60 分。</p>
 <p>如果卷王提前通关（包括传送门传送或者吃掉所有豆子），会获得大小为
 <span class="arithmatex">\(\lfloor(MaxRound(level) - CurrentRound) \times 0.43\rfloor\)</span>
@@ -1048,6 +1066,12 @@
 </table>
 <h3 id="_11">初始化信息及回放文件格式</h3>
 <p>见<a href="https://agent-guide.net9.org/document/pacman_api/">通信文档</a></p>
+<h2 id="_12">七、关于地图的生成</h2>
+<ul>
+<li>地图中共有五种障碍物，十字，L型，反L型，盒子型，反盒子型。</li>
+<li>生成地图时各种障碍物随机生成。第一关共有16个障碍物，第二关共有9个障碍物，第三关共有4个障碍物。</li>
+<li>每关开始时，卷王与三个幽灵会随机生成在地图的四个角落。</li>
+</ul>
 
 
 
