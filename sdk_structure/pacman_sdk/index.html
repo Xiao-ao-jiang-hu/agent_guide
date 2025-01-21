@@ -1225,7 +1225,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">ghosts_op</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">,</span><span class="n">ai</span><span class="p">)</span> <span class="c1"># 当前玩家为幽灵，则ai返回一个含3个元素的数组</span>
 </code></pre></div>
 <p>最后读取 judger 传来的幽灵和卷王的操作信息，更新整局游戏唯一的环境实例。</p>
-<p><strong>注意若 AI 发送了不合理的操作号（比如 5、-1 等）则会被视为不进行移动</strong></p>
+<p><strong>注意若 AI 发送了不合理的操作号则会被判定为 IA ，游戏直接结束</strong></p>
 <h3 id="ai">AI 函数</h3>
 <p>一个输入为 GameState 类实例，输出为操作数组的函数。<strong>注意，请不要在函数中直接对传入的环境实例作修改。请使用 deepcopy 复制</strong></p>
 <h2 id="_4">选手可获取的内容及获取方式</h2>
