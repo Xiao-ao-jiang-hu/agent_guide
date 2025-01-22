@@ -122,3 +122,7 @@ Rollman SDK仓库：[https://github.com/PacMan-Logic/PacmanSDK-python](https://g
 - 地图中共有五种障碍物，十字，L型，反L型，盒子型，反盒子型。
 - 生成地图时各种障碍物随机生成。第一关共有16个障碍物，第二关共有9个障碍物，第三关共有4个障碍物。
 - 每关开始时，卷王与三个幽灵会随机生成在地图的四个角落。
+
+## 八、培训讲座
+
+[第 29 届智能体大赛第一次培训交流会](https://www.bilibili.com/video/BV1SuftY2Eoc/?share_source=copy_web&vd_source=0970c77478fe991ca89fb9d661372dc0)
