@@ -710,6 +710,133 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    讲座资料
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            讲座资料
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    科研！社工？卷绩人！
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            科研！社工？卷绩人！
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lecture/pacman/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    视频链接
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lecture/algorithms.pdf" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    算法入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -806,7 +933,7 @@
 <p>本文档将详细说明ai如何与平台交互，并介绍AI的通常实现方式。</p>
 <h2 id="saiblo">saiblo平台的交互逻辑</h2>
 <p>下图展示了saiblo平台的结构:
-<a class="glightbox" href="../imgs/saiblo-structure.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/saiblo-structure.png" /></a></p>
+<a class="glightbox" href="/imgs/saiblo-structure.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="/imgs/saiblo-structure.png" /></a></p>
 <p>在对局过程中，平台向选手AI暴露的只有裁判程序的接口。 裁判程序在比赛进行过程中将通过标准IO接收选手发来的消息，并将其格式化转发给逻辑。 在逻辑进行比赛判定后，如果游戏逻辑希望向选手返回消息，则游戏逻辑将请求裁判程序转发该消息。 裁判程序会将游戏逻辑请求返回的消息格式化后通过标准IO发给选手AI。</p>
 <p>在此同时，裁判程序将监控选手AI的运行状态，在选手AI运行状态发生改变或回合运行时间超过设定值时通知游戏逻辑，由游戏逻辑判定进行游戏状态改变或终止游戏。</p>
 <ol>
