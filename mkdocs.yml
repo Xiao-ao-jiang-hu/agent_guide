@@ -16,6 +16,10 @@ nav:
   - 开发引导:
     - 热身赛: instruction/test_race.md
     - 科研！社工？卷绩人！: instruction/pacman.md
+  - 讲座资料:
+    - 科研！社工？卷绩人！: 
+      - 视频链接: lecture/pacman.md
+      - 算法入门: lecture/algorithms.pdf
 theme:
   logo: imgs/icon.jpg
   favicon: imgs/icon.jpg
@@ -31,6 +35,11 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.pathconverter:
+      base_path: 'agent_guide' # default: ''
+      relative_path: '' # default ''
+      absolute: true # default: false
+      tags: 'a script img link object embed'
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML
