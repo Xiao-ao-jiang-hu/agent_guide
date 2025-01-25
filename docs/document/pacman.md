@@ -75,10 +75,36 @@ $\lfloor(MaxRound(level) - CurrentRound) \times 0.43\rfloor$
 每一轮中判断幽灵走过的路径和卷王走过的路径（不包含起点，包含终点），若两者的路径有重合，则判断为幽灵和卷王在此轮相遇，即幽灵抓住了卷王。
 
 具体判定算法：
+1. 用 `_pacman_step_block（list）` 和 `_ghosts_step_block[i]（list，i取0、1、2分别表示三个幽灵）` 记录卷王和幽灵的路径（储存每一个经过点的坐标）。在没有疾风之翼时， `_pacman_step_block` 和 `_ghosts_step_block[i]` 长度为2；有疾风之翼时， `_pacman_step_block` 长度为3。
 
-1. 将卷王与幽灵长度为2的路径取中点转换为长度为3的路径，长度为3的路径长度不变。
+2. 将 `_pacman_step_block` 与 `_ghosts_step_block[i]` 中长度为2的路径取中点转换为长度为3的路径。转化后的路径记为 `parsed_pacman_step_block` 和 `parsed_ghosts_step_block[i]`
+```py
+def from2to3(start, end):
+    """功能函数：将长度为2的路径取中点转换为长度为3的路径"""
+    return [
+        start,
+        [
+            (start[0] + end[0]) / 2,
+            (start[1] + end[1]) / 2,
+        ],
+        end,
+    ]
+```
 
-2. 遍历三个幽灵，判断每个幽灵的路径与卷王路径中下标对应点的曼哈顿距离，如果两者曼哈顿距离小于0.5则判定为相遇。
+3. 遍历三个幽灵，计算每个幽灵的路径与卷王路径中下标对应点的曼哈顿距离，如果两者曼哈顿距离小于0.5则判定为相遇。
+```py
+for i in range(1, len(parsed_pacman_step_block)):
+    for j in range(3):
+        if (
+            manhattan_distance(
+                parsed_pacman_step_block[i], parsed_ghosts_step_block[j][i]
+            )
+            <= 0.5
+        ):
+            caught = True
+            ghost_num = j
+            break
+```
 
 ### 结算顺序
 1. 卷王进行移动并结算其获得的金币
