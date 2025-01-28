@@ -28,7 +28,7 @@ SDK 由 GYM 环境类、游戏控制器和 AI 函数组成。
     "board": self._board, # ndarray 表示当前关卡棋盘大小
     "pacman_skill_status": np.array(self._pacman.get_skills_status()), # ndarray 表示当前拥有的技能
     "pacman_coord": self._pacman.get_coord(), # ndarray 表示卷王的坐标
-    "ghosts_coord": [ghost.get_coord() for ghost in self._ghosts], # ndarray 表示幽灵的坐标
+    "ghosts_coord": [ghost.get_coord() for ghost in self._ghosts], # list[ndarray] 表示幽灵的坐标
     "score": [self._pacman_score, self._ghosts_score], # list 表示卷王和幽灵的分数
     "beannumber": self._beannumber, # int 表示地图中一共有多少豆子
     "portal_available": self._portal_available, # bool 表示传送门是否开启
@@ -125,7 +125,7 @@ ghosts_op(self.env,ai) # 当前玩家为幽灵，则ai返回一个含3个元素�
 
 最后读取 judger 传来的幽灵和卷王的操作信息，更新整局游戏唯一的环境实例。
 
-**注意若 AI 发送了不合理的操作号（比如 5、-1 等）则会被视为不进行移动**
+**注意若 AI 发送了不合理的操作号则会被判定为 IA ，游戏直接结束**
 
 ### AI 函数
 
