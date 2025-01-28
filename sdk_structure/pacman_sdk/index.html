@@ -1276,7 +1276,7 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="s2">&quot;round&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_round</span><span class="p">,</span> <span class="c1"># int 表示当前轮次</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="s2">&quot;board_size&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size</span><span class="p">,</span> <span class="c1"># int 表示当前关卡棋盘大小</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="s2">&quot;board&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_board</span><span class="p">,</span> <span class="c1"># ndarray 表示当前关卡棋盘大小</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="s2">&quot;pacman_skill_status&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pacman</span><span class="o">.</span><span class="n">get_skills_status</span><span class="p">()),</span> <span class="c1"># ndarray 表示当前拥有的技能</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="s2">&quot;pacman_skill_status&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pacman</span><span class="o">.</span><span class="n">get_skills_status</span><span class="p">()),</span> <span class="c1"># ndarray 表示当前轮次结束时所拥有的技能</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="s2">&quot;pacman_coord&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pacman</span><span class="o">.</span><span class="n">get_coord</span><span class="p">(),</span> <span class="c1"># ndarray 表示卷王的坐标</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="s2">&quot;ghosts_coord&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ghost</span><span class="o">.</span><span class="n">get_coord</span><span class="p">()</span> <span class="k">for</span> <span class="n">ghost</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ghosts</span><span class="p">],</span> <span class="c1"># list[ndarray] 表示幽灵的坐标</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_pacman_score</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ghosts_score</span><span class="p">],</span> <span class="c1"># list 表示卷王和幽灵的分数</span>
@@ -1383,7 +1383,8 @@
 <a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>5代表智引磁石
 <a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>6代表护学之盾
 <a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>7代表智慧圣典
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>8代表传送门
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>8代表时间宝石
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>9代表传送门
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">beannumber</span>
 </code></pre></div>
@@ -1393,7 +1394,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">pacman_skill_status</span>
 </code></pre></div>
 <p>为<code>list[int]</code>类型的值</p>
-<p>表示卷王当前拥有的技能，数组共 4 个元素，分别表示<b>DOUBLE_SCORE 技能、SPEED_UP 技能、MAGNET 技能的剩余轮数和当前拥有的 SHIELD 的数量</b></p>
+<p>表示当前轮次结束时，卷王拥有的技能，数组共 5 个元素，分别表示<b>DOUBLE_SCORE 技能、SPEED_UP 技能、MAGNET 技能的剩余轮数、当前拥有的 SHIELD 的数量和 FROZE 技能剩余轮数</b></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">gamestate</span><span class="o">.</span><span class="n">pacman_pos</span>
 </code></pre></div>
 <p>为<code>np.ndarray[int]</code>类型的值</p>
@@ -1456,7 +1457,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年1月21日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">2025年1月28日</span>
   </span>
 
     
