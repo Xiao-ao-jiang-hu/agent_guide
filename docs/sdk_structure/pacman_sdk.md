@@ -26,7 +26,7 @@ SDK 由 GYM 环境类、游戏控制器和 AI 函数组成。
     "round": self._round, # int 表示当前轮次
     "board_size": self._size, # int 表示当前关卡棋盘大小
     "board": self._board, # ndarray 表示当前关卡棋盘大小
-    "pacman_skill_status": np.array(self._pacman.get_skills_status()), # ndarray 表示当前拥有的技能
+    "pacman_skill_status": np.array(self._pacman.get_skills_status()), # ndarray 表示当前轮次结束时所拥有的技能
     "pacman_coord": self._pacman.get_coord(), # ndarray 表示卷王的坐标
     "ghosts_coord": [ghost.get_coord() for ghost in self._ghosts], # list[ndarray] 表示幽灵的坐标
     "score": [self._pacman_score, self._ghosts_score], # list 表示卷王和幽灵的分数
@@ -180,7 +180,8 @@ gamestate.board
 5代表智引磁石
 6代表护学之盾
 7代表智慧圣典
-8代表传送门
+8代表时间宝石
+9代表传送门
 ```
 
 ```py
@@ -199,7 +200,7 @@ gamestate.pacman_skill_status
 
 为`list[int]`类型的值
 
-表示卷王当前拥有的技能，数组共 4 个元素，分别表示<b>DOUBLE_SCORE 技能、SPEED_UP 技能、MAGNET 技能的剩余轮数和当前拥有的 SHIELD 的数量</b>
+表示当前轮次结束时，卷王拥有的技能，数组共 5 个元素，分别表示<b>DOUBLE_SCORE 技能、SPEED_UP 技能、MAGNET 技能的剩余轮数、当前拥有的 SHIELD 的数量和 FROZE 技能剩余轮数</b>
 
 ```py
 gamestate.pacman_pos
