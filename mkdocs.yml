@@ -20,6 +20,10 @@ nav:
     - 科研！社工？卷绩人！: 
       - 视频链接: lecture/pacman.md
       - 算法入门: lecture/algorithms.pdf
+  - 游戏开发文档:
+    - 前端:
+      - 通信: game_dev/frontend/communication/communication.md
+    - 后端: game_dev/backend/index.md
 theme:
   logo: imgs/icon.jpg
   favicon: imgs/icon.jpg
