@@ -2,22 +2,18 @@ site_name: 智能体大赛引导文档
 nav:
   - 文档说明: index.md
   - 平台介绍: platform.md
-  - 游戏文档: 
-    - Rollman游戏简介: document/pacman.md
-    - Rollman通信文档: document/pacman_api.md
-  - sdk结构:
-    - 总览: sdk_structure/sdk.md
-    - 热身赛: sdk_structure/test_race_sdk.md
-    - 科研！社工？卷绩人！: sdk_structure/pacman_sdk.md
-  - 播放器使用说明:
-    - 总览: player/player.md
-    - 热身赛: player/test_race.md
-    - 科研！社工？卷绩人！: player/pacman.md
-  - 开发引导:
-    - 热身赛: instruction/test_race.md
-    - 科研！社工？卷绩人！: instruction/pacman.md
-  - 讲座资料:
-    - 科研！社工？卷绩人！: 
+  - SDK总览: sdk_structure/sdk.md
+  - 播放器总览: player/player.md
+  - 热身赛:
+    - SDK文档: sdk_structure/test_race_sdk.md
+    - 开发引导: instruction/test_race.md
+  - Rollman: 
+    - 游戏简介: document/pacman.md
+    - 通信文档: document/pacman_api.md
+    - SDK文档: sdk_structure/pacman_sdk.md
+    - 播放器使用说明: player/pacman.md
+    - 开发引导: instruction/pacman.md
+    - 讲座资料:
       - 视频链接: lecture/pacman.md
       - 算法入门: lecture/algorithms.pdf
   - 游戏开发文档:
